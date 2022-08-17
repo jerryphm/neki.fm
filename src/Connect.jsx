@@ -1,32 +1,58 @@
-import React from 'react';
 import styled from 'styled-components';
 import neki from './assets/images/logo.png';
 import lastfm from './assets/images/lastfm.png';
 import { useSelector, useDispatch } from 'react-redux';
-import { authSelector, setToken, setAuthorized } from './store/auth/authSlice';
-import { useState } from 'react';
-import { useLayoutEffect } from 'react';
+import {
+   authSelector,
+   setToken,
+   setAuthorized,
+   setSk,
+} from './store/auth/authSlice';
+import client from './apiClient';
+import MD5 from 'crypto-js/md5';
+import { useMemo, useState } from 'react';
 
 function Connect() {
    const [isAuthorizedState, setAuthorizedState] = useState(false);
 
    //request authorization from the user
-   const { apiKey } = useSelector(authSelector);
+   const { api_key, secret } = useSelector(authSelector);
    const handleConnect = () => {
-      window.location.href = 'http://www.last.fm/api/auth/?api_key=' + apiKey;
+      window.location.href = 'http://www.last.fm/api/auth/?api_key=' + api_key;
    };
 
-   //get token and hide connect page, after lastfm redirect user to neki
+   //get token, session key and hide connect page, after redirecting
    const dispatch = useDispatch();
    const url = window.location.href;
-   useLayoutEffect(() => {
+   useMemo(() => {
+      //using useMemo hook instead of useLayoutEffect to prevent dom mutation *
       if (url.includes('?token=') || url.includes('&token=')) {
          const token = url.split('token=')[1];
-         setAuthorizedState(true);
-         dispatch(setToken(token));
-         dispatch(setAuthorized(true));
+         setAuthorizedState(true); // *
+         const getSk = async () => {
+            try {
+               const api_sig = MD5(
+                  `api_key${api_key}methodauth.getSessiontoken${token + secret}`
+               );
+               const res = await client({
+                  url: `/?method=auth.getSession&api_sig=${api_sig}&token=${token}`,
+               });
+               dispatch(setSk(res.data.session.key));
+               dispatch(setAuthorized(true));
+               dispatch(setToken(token));
+            } catch (error) {
+               alert('sorry, something went wrong :(');
+            }
+         };
+         getSk();
       }
    }, []);
+
+   //example account
+   console.group('example account:');
+   console.log('username: mr-john-doe');
+   console.log('pass: mr-john-doe');
+   console.groupEnd();
    return (
       !isAuthorizedState && (
          <Wrapper>
@@ -58,7 +84,6 @@ function Connect() {
       )
    );
 }
-
 export default Connect;
 const Wrapper = styled.section`
    display: flex;
@@ -119,10 +144,10 @@ const Line = styled.div`
    span:first-child {
       animation-delay: 0s;
    }
-    span:nth-child(2) {
+   span:nth-child(2) {
       animation-delay: 0.3s;
    }
-   
+
    span:nth-child(3) {
       animation-delay: 0.6s;
    }
@@ -156,6 +181,6 @@ const Button = styled.button`
    font-size: var(--fontlg);
    transition: 50ms linear;
    &:hover {
-    background-color: var(--pink);
+      background-color: var(--pink);
    }
 `;
