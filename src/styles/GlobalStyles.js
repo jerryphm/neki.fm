@@ -11,7 +11,8 @@ export const GlobalStyles = createGlobalStyle`
    --white: #fff;
    --page-color: #f4f5fe;
    --black: #15111e;
-   --gray-text: #999aa5;
+   --gray-text: #6a6a6e;
+   --light-gray-text: #8f8f8f;
    --pink: #fd8087;
    --red: #fd646f;
    
@@ -24,6 +25,9 @@ export const GlobalStyles = createGlobalStyle`
    --font4xl: 32px;
    --font5xl: 36px;
    --font6xl: 64px;
+
+   --padding-x: 24px;
+   --padding-y: 16px;
 
 }
    *, *::before, *::after {

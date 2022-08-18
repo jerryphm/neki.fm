@@ -27,8 +27,8 @@ function Connect() {
    useMemo(() => {
       //using useMemo hook instead of useLayoutEffect to prevent dom mutation *
       if (url.includes('?token=') || url.includes('&token=')) {
-         const token = url.split('token=')[1];
          setAuthorizedState(true); // *
+         const token = url.split('token=')[1];
          const getSk = async () => {
             try {
                const api_sig = MD5(
@@ -40,8 +40,8 @@ function Connect() {
                dispatch(setSk(res.data.session.key));
                dispatch(setAuthorized(true));
                dispatch(setToken(token));
-            } catch (error) {
-               alert('sorry, something went wrong :(');
+            } catch {
+               window.location.href = 'http://localhost:3000/';
             }
          };
          getSk();
@@ -89,8 +89,8 @@ const Wrapper = styled.section`
    display: flex;
    justify-content: center;
    align-items: center;
-   width: 100%;
-   height: 100%;
+   width: 100vw;
+   height: 100vh;
 `;
 const Container = styled.section`
    display: flex;
