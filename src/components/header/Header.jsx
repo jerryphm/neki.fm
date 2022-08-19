@@ -4,6 +4,7 @@ import NavButtons from './NavButtons'
 import Search from './Search'
 
 function Header() {
+  console.log( 1)
   return (
     <Container>
       <NavButtons />

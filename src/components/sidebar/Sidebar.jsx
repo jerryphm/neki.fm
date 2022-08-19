@@ -9,6 +9,7 @@ import logo from '../../assets/images/logo.png';
 import { Link, NavLink } from 'react-router-dom';
 
 function Sidebar() {
+  console.log( 1)
    return (
       <Container>
          <OpenIcon>
@@ -96,7 +97,7 @@ const OpenIcon = styled.div`
    text-align: right;
    svg {
       font-size: var(--font2xl);
-      color: #787880;
+      color: var(--black);
       cursor: pointer;
    }
 `;

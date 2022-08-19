@@ -1,13 +1,43 @@
-import React from 'react';
-import styled from 'styled-components'
+import { useMemo, useRef } from 'react';
+import styled from 'styled-components';
 import { BsArrowLeftShort, BsArrowRightShort } from 'react-icons/bs';
-
+import { useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { setLastUrl } from '../../store/navigation/navigationSlice';
+import { useEffect } from 'react';
 
 function NavButtons() {
+   const navigate = useNavigate();
+
+   const leftArrowRef = useRef();
+   const rightArrowRef = useRef();
+   const isLastUrl = window.location.href.includes('token=');
+   useEffect(() => {
+      if (isLastUrl) {
+         leftArrowRef.current.classList.add('reachBottom');
+      } else {
+         leftArrowRef.current.classList.remove('reachBottom');
+      }
+   });
+
+   const handleNavigation = (type) => {
+      if (type == 'back' && !isLastUrl) {
+         navigate(-1);
+      } else if (type == 'forward') {
+         navigate(1);
+      }
+   };
    return (
       <Container>
-         <BsArrowLeftShort />
-         <BsArrowRightShort />
+         <div ref={leftArrowRef}>
+            <BsArrowLeftShort onClick={() => handleNavigation('back')} />
+         </div>
+         <div ref={rightArrowRef}>
+            <BsArrowRightShort
+               ref={rightArrowRef}
+               onClick={() => handleNavigation('forward')}
+            />
+         </div>
       </Container>
    );
 }
@@ -18,9 +48,12 @@ const Container = styled.section`
    align-items: center;
    justify-content: space-between;
    width: 7.5rem;
-   & > svg {
+   div svg {
       font-size: var(--font3xl);
-      color: var(--gray-text);
+      color: var(--black);
       cursor: pointer;
    }
-`
+   div.reachBottom {
+      opacity: 0.4;
+   }
+`;
