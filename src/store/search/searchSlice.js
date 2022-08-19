@@ -4,7 +4,6 @@ const initialState = {
    albums: null,
    artists: null,
    tracks: null,
-   searchTerm: ''
 };
 
 const searchSlice = createSlice({
@@ -20,10 +19,6 @@ const searchSlice = createSlice({
       setTracks(state, action) {
          state.tracks = action.payload;
       },
-      setSearchTerm(state, action) {
-         state.searchTerm = action.payload;
-      },
-   
    },
 });
 

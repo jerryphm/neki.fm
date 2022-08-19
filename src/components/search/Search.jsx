@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { searchSelector } from '../../store/search/searchSlice';
 import { useSelector } from 'react-redux';
+import NotFound from './NotFound';
 
 function Search() {
    const { albums, artists, tracks } = useSelector(searchSelector);
@@ -12,7 +13,7 @@ function Search() {
    } else if (albums[0]) {
       renderContent = 'search page';
    } else {
-      renderContent = 'not found';
+      renderContent = <NotFound />;
    }
 
    return <Container>{renderContent}</Container>;

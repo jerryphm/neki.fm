@@ -5,8 +5,7 @@ import apiClient from '../../apiClient';
 import {
    setAlbums,
    setArtists,
-   setTracks,
-   setSearchTerm
+   setTracks
 } from '../../store/search/searchSlice';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -14,7 +13,7 @@ import { useNavigate } from 'react-router-dom';
 function InputSearch() {
    const navigate = useNavigate();
    const dispatch = useDispatch();
-   const [searchTerm, setSearchTermState] = useState('');
+   const [searchTerm, setSearchTerm] = useState('');
    const handleSearch = () => {
       if (searchTerm) {
          console.log(searchTerm);
@@ -38,11 +37,12 @@ function InputSearch() {
                dispatch(setAlbums(albums.data.results.albummatches.album));
                dispatch(setArtists(artists.data.results.artistmatches.artist));
                dispatch(setTracks(tracks.data.results.trackmatches.track));
-               dispatch(setSearchTerm(searchTerm))
                navigate('search');
-               setSearchTermState('');
+               setSearchTerm('');
             })
             .catch(() => alert('opps, something went wrong.Pls try again'));
+      } else {
+         dispatch(setAlbums(null))
       }
    };
 
@@ -53,7 +53,7 @@ function InputSearch() {
                type='text'
                placeholder='Search for artist, songs and...'
                value={searchTerm}
-               onChange={(e) => setSearchTermState(e.target.value)}
+               onChange={(e) => setSearchTerm(e.target.value)}
                onKeyDown={(e) => e.key == 'Enter' && handleSearch()}
             />
             <button onClick={handleSearch}>
