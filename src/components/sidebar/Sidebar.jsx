@@ -5,11 +5,11 @@ import { RiHome5Line } from 'react-icons/ri';
 import { BiChart, BiAlbum } from 'react-icons/bi';
 import { BsMusicPlayer } from 'react-icons/bs';
 import { AiOutlineHeart } from 'react-icons/ai';
+import {FiSearch} from 'react-icons/fi'
 import logo from '../../assets/images/logo.png';
-import { Link, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 function Sidebar() {
-  console.log( 1)
    return (
       <Container>
          <OpenIcon>
@@ -28,6 +28,13 @@ function Sidebar() {
             >
                <RiHome5Line />
                <span>Home</span>
+            </NavLink>
+            <NavLink
+               to='search'
+               className={({ isActive }) => (isActive ? 'active' : '')}
+            >
+               <FiSearch />
+               <span>Search</span>
             </NavLink>
             <NavLink
                to='/trend'

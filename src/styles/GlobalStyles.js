@@ -45,6 +45,12 @@ export const GlobalStyles = createGlobalStyle`
       height: 100vh;
       overflow: hidden;
       background-color: var(--outer-bg);
+      color: var(--black);
+   }
+   input, button {
+      font-size: 16px;
+      font-family: 'Poppins', sans-serif;
+      color: var(--black);
    }
    img {
       width: 100%;

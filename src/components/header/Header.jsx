@@ -1,14 +1,14 @@
 import React from 'react'
 import styled from 'styled-components'
 import NavButtons from './NavButtons'
-import Search from './Search'
+import InputSearch from './InputSearch'
 
 function Header() {
   console.log( 1)
   return (
     <Container>
       <NavButtons />
-      <Search />
+      <InputSearch />
     </Container>
   )
 }

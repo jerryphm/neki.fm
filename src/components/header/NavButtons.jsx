@@ -1,10 +1,7 @@
-import { useMemo, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { BsArrowLeftShort, BsArrowRightShort } from 'react-icons/bs';
 import { useNavigate } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import { setLastUrl } from '../../store/navigation/navigationSlice';
-import { useEffect } from 'react';
 
 function NavButtons() {
    const navigate = useNavigate();
@@ -34,7 +31,6 @@ function NavButtons() {
          </div>
          <div ref={rightArrowRef}>
             <BsArrowRightShort
-               ref={rightArrowRef}
                onClick={() => handleNavigation('forward')}
             />
          </div>
@@ -48,6 +44,10 @@ const Container = styled.section`
    align-items: center;
    justify-content: space-between;
    width: 7.5rem;
+   div {
+      display: flex;
+      align-items: center;
+   }
    div svg {
       font-size: var(--font3xl);
       color: var(--black);
