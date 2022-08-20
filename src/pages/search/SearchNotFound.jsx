@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-function NotFound() {
+function SearchNotFound() {
    return (
       <Container>
          <h1>Opps! No results to show</h1>
@@ -10,7 +10,7 @@ function NotFound() {
    );
 }
 
-export default NotFound;
+export default SearchNotFound;
 
 const Container = styled.section`
    height: calc(100vh - 88px);

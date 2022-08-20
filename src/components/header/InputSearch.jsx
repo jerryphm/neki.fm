@@ -5,7 +5,7 @@ import apiClient from '../../apiClient';
 import {
    setAlbums,
    setArtists,
-   setTracks
+   setTracks,
 } from '../../store/search/searchSlice';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -16,7 +16,6 @@ function InputSearch() {
    const [searchTerm, setSearchTerm] = useState('');
    const handleSearch = () => {
       if (searchTerm.trim()) {
-         console.log(searchTerm);
          const getAlbums = () =>
             apiClient({
                url: `/?method=album.search&album=${searchTerm}&limit=20`,
@@ -31,18 +30,24 @@ function InputSearch() {
             });
          Promise.all([getAlbums(), getArtists(), getTracks()])
             .then((results) => {
-               const albums = results[0];
-               const artists = results[1];
-               const tracks = results[2];
-               dispatch(setAlbums(albums.data.results.albummatches.album));
-               dispatch(setArtists(artists.data.results.artistmatches.artist));
-               dispatch(setTracks(tracks.data.results.trackmatches.track));
-               navigate('search');
+               const albums = results[0].data.results.albummatches.album;
+               const artists = results[1].data.results.artistmatches.artist;
+               const tracks = results[2].data.results.trackmatches.track;
+
+               if (albums[0]) {
+                  navigate(`/search/${searchTerm}`);
+               } else {
+                  navigate('/search/notfound');
+               }
+               
+               dispatch(setAlbums(albums));
+               dispatch(setArtists(artists));
+               dispatch(setTracks(tracks));
                setSearchTerm('');
             })
             .catch(() => alert('opps, something went wrong.Pls try again'));
       } else {
-         dispatch(setAlbums(null))
+         navigate('/search');
       }
    };
 

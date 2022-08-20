@@ -15,7 +15,6 @@ export const GlobalStyles = createGlobalStyle`
    --light-gray-text: #8f8f8f;
    --pink: #fd8087;
    --red: #fd646f;
-   
    --fontsm: 14px;
    --fontbase: 16px;
    --fontlg: 18px;
@@ -25,7 +24,6 @@ export const GlobalStyles = createGlobalStyle`
    --font4xl: 32px;
    --font5xl: 36px;
    --font6xl: 64px;
-
    --padding-x: 24px;
    --padding-y: 16px;
 
