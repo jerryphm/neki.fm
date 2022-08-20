@@ -15,7 +15,7 @@ function InputSearch() {
    const dispatch = useDispatch();
    const [searchTerm, setSearchTerm] = useState('');
    const handleSearch = () => {
-      if (searchTerm) {
+      if (searchTerm.trim()) {
          console.log(searchTerm);
          const getAlbums = () =>
             apiClient({

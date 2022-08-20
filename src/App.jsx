@@ -31,15 +31,13 @@ function App() {
 export default App;
 
 const Container = styled.div`
-   height: 100vh;
    width: 100vw;
    max-width: 1340px;
    padding: 0 var(--padding-x);
    margin: 0 auto;
    main {
-      height: 200vh;
       padding: var(--padding-y) var(--padding-x);
-      margin-top: 80px;
-      margin-left: 220px;
+      margin-top: 72px;
+      margin-left: 226px;
    }
 `;

@@ -51,7 +51,7 @@ function Connect() {
    //example account
    console.group('example account:');
    console.log('username: mr-john-doe');
-   console.log('pass: mr-john-doe');
+   console.log('pass: mr-john-doe-1');
    console.groupEnd();
    return (
       !isAuthorizedState && (

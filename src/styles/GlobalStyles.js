@@ -42,8 +42,6 @@ export const GlobalStyles = createGlobalStyle`
       font-size: 16px;
       font-family: 'Poppins', sans-serif;
       width: 100vw;
-      height: 100vh;
-      overflow: hidden;
       background-color: var(--outer-bg);
       color: var(--black);
    }

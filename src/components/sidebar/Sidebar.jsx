@@ -1,15 +1,34 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { BiMenuAltRight } from 'react-icons/bi';
 import { RiHome5Line } from 'react-icons/ri';
 import { BiChart, BiAlbum } from 'react-icons/bi';
 import { BsMusicPlayer } from 'react-icons/bs';
 import { AiOutlineHeart } from 'react-icons/ai';
-import {FiSearch} from 'react-icons/fi'
+import { FiSearch } from 'react-icons/fi';
 import logo from '../../assets/images/logo.png';
 import { NavLink } from 'react-router-dom';
+import { useEffect } from 'react';
+import apiClient from '../../apiClient';
+import { useSelector } from 'react-redux';
+import { authSelector } from '../../store/auth/authSlice';
+import avatarFallback from '../../assets/images/avatarFallback.jpg';
 
 function Sidebar() {
+   const [userName, setUserName] = useState('');
+   const [userAvatar, setUserAvatar] = useState('');
+   const { sk } = useSelector(authSelector);
+   useEffect(() => {
+      (async () => {
+         const res = await apiClient({
+            url: `/?method=user.getInfo&sk=${sk}`,
+         });
+         const userName = res.data.user.name;
+         const userAvatar = res.data.user.image[3]['#text'] || avatarFallback;
+         setUserName(userName);
+         setUserAvatar(userAvatar);
+      })();
+   }, []);
    return (
       <Container>
          <OpenIcon>
@@ -57,33 +76,11 @@ function Sidebar() {
                <BiAlbum />
                <span>Songs</span>
             </NavLink>
-            {/* <span>Discover</span>
-            <Link to='/'>
-               <AiOutlineHeart />
-               <span>New and Notable</span>
-            </Link>
-            <Link to='/'>
-               <AiOutlineHeart />
-               <span>Release Calendar</span>
-            </Link>
-            <Link to='/'>
-               <AiOutlineHeart />
-               <span>Events</span>
-            </Link>
-            <span>Collection</span>
-            <Link to='/'>
-               <AiOutlineHeart />
-               <span>Favorite Songs</span>
-            </Link>
-            <Link to='/'>
-               <AiOutlineHeart />
-               <span>Artist</span>
-            </Link>
-            <Link to='/'>
-               <AiOutlineHeart />
-               <span>Albums</span>
-            </Link> */}
          </Nav>
+         <User>
+            <img src={userAvatar} alt='' />
+            <p>{userName}</p>
+         </User>
       </Container>
    );
 }
@@ -100,7 +97,10 @@ const Container = styled.aside`
 `;
 
 const OpenIcon = styled.div`
-   height: 24px;
+   display: flex;
+   justify-content: end;
+   align-items: center;
+   height: 40px;
    text-align: right;
    svg {
       font-size: var(--font2xl);
@@ -163,3 +163,55 @@ const Nav = styled.nav`
       }
    }
 `;
+
+const User = styled.div`
+   position: absolute;
+   bottom: 0px;
+   left: 0;
+   right: 0;
+   display: flex;
+   align-items: center;
+   gap: 1.6rem;
+   padding: 16px 34px;
+   border-top: 1px solid var(--light-gray-text);
+   user-select: none;
+   img {
+      width: 3rem;
+      height: 3rem;
+      border-radius: 5rem;
+   }
+   p {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+   }
+`;
+
+{
+   /* <span>Discover</span>
+            <Link to='/'>
+               <AiOutlineHeart />
+               <span>New and Notable</span>
+            </Link>
+            <Link to='/'>
+               <AiOutlineHeart />
+               <span>Release Calendar</span>
+            </Link>
+            <Link to='/'>
+               <AiOutlineHeart />
+               <span>Events</span>
+            </Link>
+            <span>Collection</span>
+            <Link to='/'>
+               <AiOutlineHeart />
+               <span>Favorite Songs</span>
+            </Link>
+            <Link to='/'>
+               <AiOutlineHeart />
+               <span>Artist</span>
+            </Link>
+            <Link to='/'>
+               <AiOutlineHeart />
+               <span>Albums</span>
+            </Link> */
+}
