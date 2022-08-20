@@ -5,7 +5,7 @@ import { tagSelector, setTags } from '../../store/tag/tagSlice';
 import { useEffect } from 'react';
 import gradientColors from '../../assets/gradientColors';
 import { Link } from 'react-router-dom';
-import {BsMusicNote} from 'react-icons/bs'
+import { BsMusicNote } from 'react-icons/bs';
 
 function SearchHome() {
    const dispatch = useDispatch();
@@ -36,15 +36,16 @@ function SearchHome() {
             tag.appendChild(ripples);
          };
       });
-      let lastRandom
+      let lastRandom;
       const timer = setInterval(() => {
          const random = Math.floor(Math.random() * 25);
-         console.log(random)
-         tags[random].classList.add('active')
-         tags[lastRandom]?.classList.remove('active')
-         lastRandom = random
+         tags[random].classList.add('active');
+         tags[lastRandom]?.classList.remove('active');
+         lastRandom = random;
       }, 3000);
-      return () => {clearInterval(timer)}
+      return () => {
+         clearInterval(timer);
+      };
    });
    const correct = (tagName) => {
       let toLc = tagName.toLowerCase();
@@ -56,7 +57,7 @@ function SearchHome() {
       <Container>
          <h2>Most popular tags for you</h2>
          {tags.map((tag, i) => (
-            <Link to={correct(tag.name)} className='tag' key={i}>
+            <Link to={`tag/${correct(tag.name)}`} className='tag' key={i}>
                <p>{tag.name}</p>
                <BsMusicNote />
             </Link>
@@ -72,7 +73,6 @@ export const Container = styled.section`
    flex-wrap: wrap;
    gap: 1.2rem;
    h2 {
-
       width: 100%;
       margin-bottom: 1rem;
       font-size: var(--fontxl);
