@@ -16,6 +16,7 @@ export const GlobalStyles = createGlobalStyle`
    --pink: #fd8087;
    --red: #fd646f;
    --fontsm: 14px;
+   --fontpsm: 15px;
    --fontbase: 16px;
    --fontlg: 18px;
    --fontxl: 20px;
@@ -32,6 +33,7 @@ export const GlobalStyles = createGlobalStyle`
       margin: 0;
       padding: 0;
       box-sizing: border-box;
+      user-select: none;
    }
    html {
       font-size: 62.5%;

@@ -37,7 +37,9 @@ const Container = styled.div`
    margin: 0 auto;
    main {
       padding: var(--padding-y) var(--padding-x);
+      padding-right: 0;
       margin-top: 72px;
+      margin-bottom: 80px;
       margin-left: 226px;
    }
 `;

@@ -10,7 +10,7 @@ import {
 } from './store/auth/authSlice';
 import client from './apiClient';
 import MD5 from 'crypto-js/md5';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 function Connect() {
    const [isAuthorizedState, setAuthorizedState] = useState(false);
@@ -53,6 +53,10 @@ function Connect() {
    console.log('username: mr-john-doe');
    console.log('pass: mr-john-doe-1');
    console.groupEnd();
+
+   useEffect(() => {
+      return () => console.clear();
+   });
    return (
       !isAuthorizedState && (
          <Wrapper>
