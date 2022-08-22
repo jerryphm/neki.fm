@@ -33,6 +33,7 @@ export default App;
 const Container = styled.div`
    width: 100vw;
    max-width: 1340px;
+   min-width: 800px;
    padding: 0 var(--padding-x);
    margin: 0 auto;
    main {

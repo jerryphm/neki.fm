@@ -16,33 +16,30 @@ function InputSearch() {
    const [searchTerm, setSearchTerm] = useState('');
    const handleSearch = () => {
       if (searchTerm.trim()) {
-         const getAlbums = () =>
+         const getInfo = async (type, limit = 5) =>
             apiClient({
-               url: `/?method=album.search&album=${searchTerm}&limit=20`,
+               url: `/?method=${type}.search&${type}=${searchTerm}&limit=${limit}`,
             });
-         const getArtists = () =>
-            apiClient({
-               url: `/?method=artist.search&artist=${searchTerm}&limit=20`,
-            });
-         const getTracks = () =>
-            apiClient({
-               url: `/?method=track.search&track=${searchTerm}&limit=20`,
-            });
-         Promise.all([getAlbums(), getArtists(), getTracks()])
+         Promise.all([
+            getInfo('album'),
+            getInfo('artist'),
+            getInfo('track', 15),
+         ])
             .then((results) => {
                const albums = results[0].data.results.albummatches.album;
                const artists = results[1].data.results.artistmatches.artist;
                const tracks = results[2].data.results.trackmatches.track;
 
                if (albums[0]) {
+                  dispatch(setAlbums(albums));
+                  dispatch(setArtists(artists));
+                  dispatch(setTracks(tracks));
+                  
                   navigate(`/search/${searchTerm}`);
                } else {
                   navigate('/search/notfound');
                }
-               
-               dispatch(setAlbums(albums));
-               dispatch(setArtists(artists));
-               dispatch(setTracks(tracks));
+
                setSearchTerm('');
             })
             .catch(() => alert('opps, something went wrong.Pls try again'));

@@ -46,6 +46,5 @@ const Container = styled.div`
    }
    button {
       font-size: var(--fontpsm);
-      
    }
 `;

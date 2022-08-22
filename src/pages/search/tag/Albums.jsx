@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { AiFillPlayCircle } from 'react-icons/ai';
 
 function Albums({ albums }) {
-   console.log(albums);
    return (
       <Container>
          <h2>Top Albums</h2>

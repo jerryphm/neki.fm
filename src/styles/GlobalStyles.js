@@ -8,6 +8,7 @@ export const GlobalStyles = createGlobalStyle`
 }
 :root {
    --outer-bg: #e7e8f3;
+   --outer-bg-rbga: 231, 232, 243;
    --white: #fff;
    --page-color: #f4f5fe;
    --black: #15111e;
@@ -33,7 +34,6 @@ export const GlobalStyles = createGlobalStyle`
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      user-select: none;
    }
    html {
       font-size: 62.5%;
@@ -42,6 +42,7 @@ export const GlobalStyles = createGlobalStyle`
       font-size: 16px;
       font-family: 'Poppins', sans-serif;
       width: 100vw;
+      
       background-color: var(--outer-bg);
       color: var(--black);
    }

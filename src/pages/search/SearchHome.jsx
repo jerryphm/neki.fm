@@ -25,17 +25,6 @@ function SearchHome() {
    }
    useEffect(() => {
       const tags = document.querySelectorAll('.tag');
-      tags.forEach((tag) => {
-         tag.onclick = (e) => {
-            let x = e.clientX - e.currentTarget.offsetLeft;
-            let y = e.clientY - e.currentTarget.offsetTop;
-
-            let ripples = document.createElement('span');
-            ripples.style.left = x + 'px';
-            ripples.style.top = y + 'px';
-            tag.appendChild(ripples);
-         };
-      });
       let lastRandom;
       const timer = setInterval(() => {
          const random = Math.floor(Math.random() * 25);

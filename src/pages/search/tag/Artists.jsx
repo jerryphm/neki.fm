@@ -37,7 +37,6 @@ const Container = styled.section`
       0% {
          transform: translate3d(var(--move-initial), 0, 0);
       }
-
       100% {
          transform: translate3d(var(--move-final), 0, 0);
       }
