@@ -31,7 +31,7 @@ function Albums({ albums }) {
 export default Albums;
 
 const Container = styled.section`
-   margin: 3rem 0;
+   margin: 3rem 0 10rem;
    h2 {
       font-size: var(--fontxl);
       margin-bottom: 1rem;

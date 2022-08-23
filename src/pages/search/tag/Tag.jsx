@@ -29,7 +29,7 @@ function Tag() {
          })
          .catch(() => alert('opps! something went wrong'));
    }, []);
-   const { intro, albums, artists, tracks } = info || {};
+   const { intro, albums, artists } = info || {};
    return (
       info && (
          <Container>
@@ -42,4 +42,17 @@ function Tag() {
 }
 
 export default Tag;
-const Container = styled.section``;
+const Container = styled.section`
+   height: calc(100vh - var(--header-height));
+   overflow: scroll;
+   /* Hide scrollbar for Chrome, Saf   ari and Opera */
+   &::-webkit-scrollbar {
+      display: none;
+   }
+
+   /* Hide scrollbar for IE, Edge and Firefox */
+   & {
+      -ms-overflow-style: none; /* IE and Edge */
+      scrollbar-width: none; /* Firefox */
+   }
+`;

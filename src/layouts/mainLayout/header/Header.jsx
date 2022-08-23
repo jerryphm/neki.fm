@@ -1,28 +1,32 @@
-import React from 'react'
-import styled from 'styled-components'
-import NavButtons from './NavButtons'
-import InputSearch from './InputSearch'
+import React from 'react';
+import styled from 'styled-components';
+import NavButtons from './NavButtons';
+import InputSearch from './InputSearch';
 
 function Header() {
-  return (
-    <Container>
-      <NavButtons />
-      <InputSearch />
-    </Container>
-  )
+   return (
+      <Container>
+         <section>
+            <NavButtons />
+            <InputSearch />
+         </section>
+      </Container>
+   );
 }
 
-export default Header
+export default Header;
 
 const Container = styled.header`
-   /* position: fixed;
-   z-index: 999;
-   top: 0;
-   right: 0;
-   left: 250px;
+   position: relative;
+   height: var(--header-height);
    display: flex;
    align-items: center;
-   gap: 10%;
-   padding: var(--padding-y) var(--padding-x);
-   background-color: var(--outer-bg); */
-`
+   section {
+     display: flex;
+     align-items: center;
+     gap: 2rem;
+     input {
+       width: 60vw;
+     }
+   }
+`;

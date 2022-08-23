@@ -10,4 +10,6 @@ function Search() {
 }
 
 export default Search;
-const Container = styled.section``;
+const Container = styled.section`
+   padding-bottom: 10rem;
+`;

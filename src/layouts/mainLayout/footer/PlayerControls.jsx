@@ -35,7 +35,9 @@ function PlayerControls() {
             </div>
          </Buttons>
          <Progress>
-            <input type="range" name="progress-bar" id="" />
+            <span>2:35</span>
+            <input type='range' name='progress-bar' id='' />
+            <span>4:02</span>
          </Progress>
       </Container>
    );
@@ -46,14 +48,55 @@ const Container = styled.section`
    display: flex;
    flex-direction: column;
    justify-content: space-between;
+   max-width: 65rem;
    padding: 1.5rem 2rem;
    border-radius: 1rem;
+
+   /* css input track and thumb */
+   input {
+      -webkit-appearance: none;
+      appearance: none;
+      background: transparent;
+      cursor: pointer;
+   }
+   input::-webkit-slider-runnable-track {
+         background: var(--black);
+         height: 0.4rem;
+         border-radius: 5px;
+   }
+   input::-moz-range-track {
+      background: var(--black);
+      height: 0.4rem;
+      border-radius: 5px;
+   }
+   input::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      margin-top: calc(2px - 4px);
+      height: 0.8rem;
+      width:0.8rem;
+      border: 2px solid var(--black);
+      border-radius: 1rem;
+      background-color: var(--white);
+      background-clip: content-box;
+   }
+   input::-moz-range-thumb {
+      border: none; /*Removes extra border that FF applies*/
+      border-radius: 0; /*Removes default border-radius that FF applies*/
+      background-color: var(--white);
+      height: 0.5rem;
+      width: 0.5rem;
+      border: 2px solid var(--black);
+      border-radius: 1rem;
+   }
+   input:focus {
+      outline: none;
+   }
 `;
 const Buttons = styled.div`
    display: flex;
    align-items: center;
    justify-content: space-between;
-   gap: 2rem;
    font-size: var(--fontxl);
    color: var(--gray-text);
    & > div {
@@ -66,6 +109,7 @@ const Buttons = styled.div`
    }
 
    .love-track {
+      margin-right: 1.5rem;
       div {
          display: flex;
          align-items: center;
@@ -77,6 +121,7 @@ const Buttons = styled.div`
       }
    }
    .main-buttons {
+      width: 18rem;
       gap: 1.5rem;
       svg:nth-child(2),
       svg:nth-child(3),
@@ -89,50 +134,24 @@ const Buttons = styled.div`
    }
 
    .volume {
+      max-width: 15.5rem;
       flex-shrink: 0;
       gap: 0.4rem;
-
       padding-left: 7%;
+      svg {
+         min-width: fit-content;
+      }
       input {
-         -webkit-appearance: none;
-         appearance: none;
-         background: transparent;
-         cursor: pointer;
-         width: 70%;
-         max-width: 70px;
-      }
-      input::-webkit-slider-runnable-track,
-      input::-moz-range-track {
-         background: var(--black);
-         height: 0.4rem;
-         border-radius: 5px;
-      }
-      input::-webkit-slider-thumb {
-         -webkit-appearance: none;
-         appearance: none;
-         margin-top: calc(2px - 4px);
-         height: 0.5rem;
-         width: 0.5rem;
-         border: 3px solid var(--black);
-         border-radius: 1rem;
-         background-color: var(--white);
-         background-clip: content-box;
-      }
-      input::-moz-range-thumb {
-         border: none; /*Removes extra border that FF applies*/
-         border-radius: 0; /*Removes default border-radius that FF applies*/
-         background-color: var(--white);
-         height: 0.5rem;
-         width: 0.5rem;
-         border: 3px solid var(--black);
-         border-radius: 1rem;
-      }
-      input:focus {
-         outline: none;
+         max-width: 65px;
       }
    }
 `;
 const Progress = styled.div`
+   display: flex;
+   align-items: center;
+   gap: 2rem;
+   margin-top: 1rem;
+   font-size: 14px;
    input {
       width: 100%;
    }

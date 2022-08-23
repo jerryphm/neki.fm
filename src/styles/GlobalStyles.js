@@ -29,6 +29,9 @@ export const GlobalStyles = createGlobalStyle`
    --padding-x: 24px;
    --padding-y: 16px;
 
+   --header-height: 80px;
+   --footer-height: 100px;
+
 }
    *, *::before, *::after {
       margin: 0;

@@ -5,7 +5,7 @@ function Artists({ artists }) {
    return (
       <Container>
          <h2>Top Artists</h2>
-         <div>
+         <div className='artist__marquee'>
             {artists.map((artist, i) => (
                <a href='#' key={i}>
                   <span>{artist.name}</span>
@@ -18,7 +18,6 @@ function Artists({ artists }) {
 
 export default Artists;
 const Container = styled.section`
-   position: relative;
    overflow: hidden;
    --offset: 0vw;
    --move-initial: calc(-25% + var(--offset));
@@ -27,25 +26,14 @@ const Container = styled.section`
       margin-top: 1rem;
       font-size: var(--fontxl);
    }
-   div {
-      width: fit-content;
-      position: relative;
-      transform: translate3d(var(--move-initial), 0, 0);
-      animation: marquee 45s 1s linear infinite;
-   }
-   @keyframes marquee {
-      0% {
-         transform: translate3d(var(--move-initial), 0, 0);
-      }
-      100% {
-         transform: translate3d(var(--move-final), 0, 0);
-      }
-   }
-   div {
+   .artist__marquee {
       display: flex;
       align-items: center;
       gap: 1rem;
       height: 80px;
+      width: fit-content;
+      transform: translate(var(--move-initial));
+      animation: marquee 45s 1s linear infinite;
       a {
          display: flex;
          align-items: center;
@@ -59,4 +47,13 @@ const Container = styled.section`
          white-space: nowrap;
       }
    }
+   @keyframes marquee {
+      0% {
+         transform: translate(var(--move-initial));
+      }
+      100% {
+         transform: translate(var(--move-final));
+      }
+   }
+   
 `;

@@ -23,7 +23,12 @@ const Container = styled.section`
    display: flex;
    height: 100vh;
    max-width: 1340px;
+   min-width: 720px;
+   overflow: hidden;
    section.right-side-cmp {
+      position: relative;
       flex-grow: 1;
+      overflow: hidden;
+      padding: 0 var(--padding-x);
    }
 `;

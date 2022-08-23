@@ -21,6 +21,9 @@ function Result() {
 export default Result;
 
 const Container = styled.section`
+   height: calc(100vh - var(--header-height));
+   overflow: scroll;
+   
    h1 {
       margin-bottom: 1rem;
       color: var(--gray-text);

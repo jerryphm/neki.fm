@@ -5,32 +5,35 @@ import { PlayerControls, PlayerInfo } from './index';
 function Footer() {
    return (
       <Container>
-         <PlayerControls />
-         <PlayerInfo />
+         <div className='footer__push'>
+            <PlayerControls />
+            <PlayerInfo />
+         </div>
       </Container>
    );
 }
 
 export default Footer;
 const Container = styled.footer`
-   position: fixed;
-   z-index: 999;
+   position: absolute;
    bottom: 0;
-   left: 250px;
-   right: 0;
-   height: 80px;
-   display: flex;
-   align-items: start;
-   gap: 24px;
-   padding: 0 var(--padding-x);
+   right: var(--padding-x);
+   left: var(--padding-x);
    background-color: var(--outer-bg);
+   .footer__push {
+      display: flex;
+      justify-content: space-between;
+      height: var(--header-height);
+      background-color: var(--white);
+      transform: translateY(-1rem);
+      border-radius: 1rem;
+   }
+
    section {
-      transform: translateY(-30px);
-      height: 120%;
-      background-color: #fff;
+      padding: 1rem 1.7rem;
    }
    section:first-child {
-      width: 70%;
+      width: 65%;
    }
    section:last-child {
       width: 30%;
