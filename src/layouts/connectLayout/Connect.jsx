@@ -1,16 +1,16 @@
-import styled from 'styled-components';
-import neki from './assets/images/logo.png';
-import lastfm from './assets/images/lastfm.png';
+import { useEffect, useMemo, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import client from '../../client';
+import MD5 from 'crypto-js/md5';
 import {
    authSelector,
    setToken,
    setAuthorized,
    setSk,
-} from './store/auth/authSlice';
-import client from './apiClient';
-import MD5 from 'crypto-js/md5';
-import { useEffect, useMemo, useState } from 'react';
+} from '../../store/authSlice'
+import neki from '../../assets/images/logo.png';
+import lastfm from '../../assets/images/lastfm.png';
+import styled from 'styled-components';
 
 function Connect() {
    const [isAuthorizedState, setAuthorizedState] = useState(false);
@@ -89,6 +89,7 @@ function Connect() {
    );
 }
 export default Connect;
+
 const Wrapper = styled.section`
    display: flex;
    justify-content: center;

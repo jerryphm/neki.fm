@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import { searchSelector } from '../../../store/search/searchSlice';
+import { searchSelector } from '../../../store/searchSlice';
 import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
 import { Albums, Artists, Tracks } from './index';

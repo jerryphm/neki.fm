@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import apiClient from '../../../apiClient';
+import apiClient from '../../../client';
 import styled from 'styled-components';
 import { Heading, Artists, Albums } from './index';
 

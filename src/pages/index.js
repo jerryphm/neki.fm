@@ -1,6 +1,5 @@
-export { default as Trend } from './Trend';
-export { default as Home } from './Home';
-export { default as Genres } from './Genres';
-export { default as Songs } from './Songs';
-export { default as NotFound } from './NotFound';
+export { default as Trend } from './trend/Trend';
+export { default as Home } from './home/Home';
+export { default as Songs } from './songs/Songs';
+export { default as NotFound } from './notFound/NotFound';
 export { default as Search } from './search/Search';

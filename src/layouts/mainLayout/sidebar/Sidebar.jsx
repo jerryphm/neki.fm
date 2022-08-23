@@ -1,18 +1,16 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import { BiMenuAltRight } from 'react-icons/bi';
-import { RiHome5Line } from 'react-icons/ri';
-import { BiChart, BiAlbum } from 'react-icons/bi';
-import { BsMusicPlayer } from 'react-icons/bs';
-import { AiOutlineHeart } from 'react-icons/ai';
-import { FiSearch } from 'react-icons/fi';
-import logo from '../../assets/images/logo.png';
-import { NavLink } from 'react-router-dom';
-import { useEffect } from 'react';
-import apiClient from '../../apiClient';
+import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { authSelector } from '../../store/auth/authSlice';
-import avatarFallback from '../../assets/images/avatarFallback.jpg';
+import { authSelector } from '../../../store/authSlice';
+import { NavLink } from 'react-router-dom';
+import client from '../../../client';
+
+import logo from '../../../assets/images/logo.png';
+import avatarFallback from '../../../assets/images/avatarFallback.jpg';
+import { RiHome5Line } from 'react-icons/ri';
+import { BiChart, BiAlbum, BiMenuAltRight } from 'react-icons/bi';
+import { BsMusicPlayer } from 'react-icons/bs';
+import { FiSearch } from 'react-icons/fi';
+import styled from 'styled-components';
 
 function Sidebar() {
    const [userName, setUserName] = useState('');
@@ -20,7 +18,7 @@ function Sidebar() {
    const { sk } = useSelector(authSelector);
    useEffect(() => {
       (async () => {
-         const res = await apiClient({
+         const res = await client({
             url: `/?method=user.getInfo&sk=${sk}`,
          });
          const userName = res.data.user.name;
@@ -29,9 +27,16 @@ function Sidebar() {
          setUserAvatar(userAvatar);
       })();
    }, []);
+
+   const toggleSideBar = () => {
+      const rawContainer = document.getElementsByTagName('aside')
+      const container = rawContainer['0']
+      
+      container.classList.toggle('collapse')
+   }
    return (
-      <Container>
-         <OpenIcon>
+      <Container >
+         <OpenIcon onClick={toggleSideBar}>
             <BiMenuAltRight />
          </OpenIcon>
          <Logo>
@@ -87,13 +92,12 @@ function Sidebar() {
 
 export default Sidebar;
 const Container = styled.aside`
-   position: fixed;
-   top: 0;
-   left: 0;
-   bottom: 0;
    width: 250px;
    padding: var(--padding-y) 18px var(--padding-y) var(--padding-x);
    background-color: var(--white);
+   &.collapse {
+      width: 150px;
+   }
 `;
 
 const OpenIcon = styled.div`
@@ -172,6 +176,7 @@ const User = styled.div`
    display: flex;
    align-items: center;
    gap: 1.6rem;
+   height: 80px;
    padding: 16px 34px;
    border-top: 1px solid var(--light-gray-text);
    user-select: none;

@@ -1,14 +1,14 @@
 import { useState } from 'react';
-import { FiSearch } from 'react-icons/fi';
-import styled from 'styled-components';
-import apiClient from '../../apiClient';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import client from '../../../client.js';
 import {
    setAlbums,
    setArtists,
    setTracks,
-} from '../../store/search/searchSlice';
-import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+} from '../../../store/searchSlice.js';
+import { FiSearch } from 'react-icons/fi';
+import styled from 'styled-components';
 
 function InputSearch() {
    const navigate = useNavigate();
@@ -17,7 +17,7 @@ function InputSearch() {
    const handleSearch = () => {
       if (searchTerm.trim()) {
          const getInfo = async (type, limit = 5) =>
-            apiClient({
+            client({
                url: `/?method=${type}.search&${type}=${searchTerm}&limit=${limit}`,
             });
          Promise.all([

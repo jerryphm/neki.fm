@@ -1,6 +1,6 @@
 import React from 'react';
+import { Track } from '../../../common';
 import styled from 'styled-components';
-import { Track } from '../../../components/common';
 
 
 function Tracks({ tracks }) {

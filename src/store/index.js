@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { authReducer } from './auth/authSlice';
-import { searchReducer } from './search/searchSlice';
-import { tagReducer } from './tag/tagSlice';
+import { authReducer } from './authSlice';
+import { searchReducer } from './searchSlice';
+import { tagReducer } from './tagSlice';
 
 const store = configureStore({
    reducer: {

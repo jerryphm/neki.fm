@@ -1,15 +1,16 @@
+import App from './App';
 import { BrowserRouter, Routes, Route, Outlet } from 'react-router-dom';
-import React from 'react';
-import App from '../App';
-import { Home, Search, Trend, Genres, Songs, NotFound } from '../pages';
-import { SearchHome, Result, SearchNotFound, Tag } from '../pages/search';
+import { Home, Search, Trend, Songs, NotFound } from './pages';
+import { SearchHome, Result, SearchNotFound, Tag } from './pages/search';
 
-function routeCmp() {
+function RouteManager() {
    return (
       <BrowserRouter>
          <Routes>
             <Route path='/' element={<App />}>
+               {/* Home */}
                <Route index element={<Home />}></Route>
+               {/* Search */}
                <Route path='search' element={<Search />}>
                   <Route index element={<SearchHome />}></Route>
                   <Route path='tag' element={<Outlet />}>
@@ -18,9 +19,11 @@ function routeCmp() {
                   <Route path=':resultKeyWord' element={<Result />} />
                   <Route path='notfound' element={<SearchNotFound />} />
                </Route>
+               {/* Trend */}
                <Route path='trend' element={<Trend />}></Route>
-               <Route path='genres' element={<Genres />}></Route>
+               {/* Songs */}
                <Route path='songs' element={<Songs />}></Route>
+               {/* Not found */}
                <Route path='*' element={<NotFound />}></Route>
             </Route>
          </Routes>
@@ -28,4 +31,4 @@ function routeCmp() {
    );
 }
 
-export default routeCmp;
+export default RouteManager;

@@ -1,47 +1,64 @@
-import React from 'react';
 import { useMemo, useState } from 'react';
-import styled from 'styled-components';
+import { useSelector } from 'react-redux';
+import { authSelector } from '../store/authSlice';
+import MD5 from 'crypto-js/md5';
+import client from '../client';
 import { IoVolumeMediumOutline } from 'react-icons/io5';
-
-import apiClient from '../../apiClient';
+import styled from 'styled-components';
 function Track({ trackName, artistName, position }) {
+   const { token, secret, sk, api_key } = useSelector(authSelector);
+
+   //get info track
    const [infoTrack, setInfoTrack] = useState(null);
    useMemo(() => {
       const getInfoTrack = async () => {
-         const res = await apiClient({
+         const res = await client({
             url: `/?method=track.getInfo&artist=${artistName}&track=${trackName}`,
          });
          const infoTrack = res.data.track;
-
-         console.log(infoTrack);
-         const {
-            album,
-            artist,
-            duration,
-            name,
-            listeners,
-            playcount,
-            streamable,
-         } = infoTrack;
          setInfoTrack(infoTrack);
       };
       getInfoTrack();
    }, []);
+
+   //correct
    const correctPosition = (p) => {
-      if (p <= 9) {
-         return '0' + p;
-      }
-      return p;
+      return p <= 9 ? '0' + p : p;
    };
    const convertDuration = (d) => {
       const minutes = Math.floor(d / 1000 / 60);
       let seconds = (d / 1000) % 60;
-      if (seconds <= 9) seconds ='0' + seconds
+      if (seconds <= 9) seconds = '0' + seconds;
       return minutes + ':' + seconds;
+   };
+
+   //request music data for listening
+   const handlePlay = async () => {
+      const url = 'http://ws.audioscrobbler.com/2.0/';
+      const api_sig = MD5(
+         `api_key${api_key}artist${infoTrack.artist.name}formatjsonmethodtrack.updateNowPlayingtoken${token + secret}`
+      );
+      const params = {
+         artist: infoTrack.artist.name, //2
+         track: infoTrack.track,
+         method: 'track.updateNowPlaying',
+         api_key, //1
+         sk,
+         api_sig,
+         format: 'json', //3
+      };
+      const res = await fetch(url, {
+         method: 'POST',
+         headers: {
+            'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+         },
+         body: new URLSearchParams(params),
+      });
+      console.log(res);
    };
    return (
       infoTrack && (
-         <Container>
+         <Container onClick={handlePlay}>
             <div>
                <span> {correctPosition(position)}</span>
                <IoVolumeMediumOutline />
@@ -49,7 +66,7 @@ function Track({ trackName, artistName, position }) {
             <div>{infoTrack.name}</div>
             <div>{infoTrack.artist.name}</div>
             <div>{convertDuration(infoTrack.duration)}</div>
-            <div>{infoTrack.album.title}</div>
+            <div>{infoTrack.album?.title}</div>
          </Container>
       )
    );
@@ -66,7 +83,7 @@ const Container = styled.section`
    font-size: var(--fontxs);
    color: var(--gray-text);
    cursor: pointer;
-   transform: .25s linear;
+   transform: 0.25s linear;
    &:not(first-child) {
       margin-top: 1rem;
    }
@@ -94,7 +111,7 @@ const Container = styled.section`
          transform: translate(-1px, -50%);
          opacity: 0;
          font-size: var(--font2xl);
-         transition: .1s linear;
+         transition: 0.1s linear;
       }
    }
    div:nth-child(4) {

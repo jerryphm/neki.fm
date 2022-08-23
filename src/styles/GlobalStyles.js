@@ -12,7 +12,7 @@ export const GlobalStyles = createGlobalStyle`
    --white: #fff;
    --page-color: #f4f5fe;
    --black: #15111e;
-   --gray-text: #6a6a6e;
+   --gray-text: #585858;
    --light-gray-text: #8f8f8f;
    --pink: #fd8087;
    --red: #fd646f;
@@ -37,12 +37,12 @@ export const GlobalStyles = createGlobalStyle`
    }
    html {
       font-size: 62.5%;
+      height: 100vh;
    }
    body {
       font-size: 16px;
       font-family: 'Poppins', sans-serif;
       width: 100vw;
-      
       background-color: var(--outer-bg);
       color: var(--black);
    }

@@ -1,11 +1,11 @@
 import { useEffect, useRef } from 'react';
-import styled from 'styled-components';
-import { BsArrowLeftShort, BsArrowRightShort } from 'react-icons/bs';
 import { useNavigate } from 'react-router-dom';
+import { BsArrowLeftShort, BsArrowRightShort } from 'react-icons/bs';
+import styled from 'styled-components';
 
 function NavButtons() {
    const navigate = useNavigate();
-
+   
    const leftArrowRef = useRef();
    const rightArrowRef = useRef();
    const isLastUrl = window.location.href.includes('token=');

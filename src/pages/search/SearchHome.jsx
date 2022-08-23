@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import apiClient from '../../apiClient';
+import apiClient from '../../client';
 import { useSelector, useDispatch } from 'react-redux';
-import { tagSelector, setTags } from '../../store/tag/tagSlice';
+import { tagSelector, setTags } from '../../store/tagSlice';
 import { useEffect } from 'react';
 import gradientColors from '../../assets/gradientColors';
 import { Link } from 'react-router-dom';

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import apiClient from '../../../apiClient';
+import apiClient from '../../../client';
 import styled from 'styled-components';
 import { useMemo } from 'react';
 

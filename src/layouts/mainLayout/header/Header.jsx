@@ -13,8 +13,9 @@ function Header() {
 }
 
 export default Header
+
 const Container = styled.header`
-   position: fixed;
+   /* position: fixed;
    z-index: 999;
    top: 0;
    right: 0;
@@ -23,5 +24,5 @@ const Container = styled.header`
    align-items: center;
    gap: 10%;
    padding: var(--padding-y) var(--padding-x);
-   background-color: var(--outer-bg);
+   background-color: var(--outer-bg); */
 `
