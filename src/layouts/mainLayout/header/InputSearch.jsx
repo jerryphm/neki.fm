@@ -77,6 +77,7 @@ const Container = styled.section`
    padding: 1rem 1.4rem 1rem 5rem;
    border-radius: 5rem;
    background-color: var(--white);
+   overflow: hidden;
    input {
       width: 100%;
       height: 100%;
@@ -84,6 +85,7 @@ const Container = styled.section`
       outline: none;
       background-color: transparent;
       font-size: 15px;
+      cursor: text;
       ::placeholder {
          color: var(--light-gray-text);
       }

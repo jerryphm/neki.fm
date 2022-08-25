@@ -1,17 +1,16 @@
-import React from 'react';
-import { Track } from '../../../common';
+import { Track } from '.';
 import styled from 'styled-components';
 
-
-function Tracks({ tracks }) {
+function Tracks({ tracks, display = 'Top Tracks' }) {
+   
    return (
       <Container>
-         <h2>Top Tracks</h2>
+         <h2>{display}</h2>
          {tracks.map((track, i) => (
             <Track
                trackName={track.name}
                artistName={track.artist}
-               position={i + 1}
+               id={i} // use id to show position, and use for player
                key={i}
             />
          ))}

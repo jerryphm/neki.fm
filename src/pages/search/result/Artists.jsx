@@ -19,7 +19,7 @@ function Artists({ artists }) {
          getProfilePicture(artists[4].name),
       ]).then((results) => {
          const profilePictures = results.map((result) => ({
-            img: result.data.topalbums.album[0].image[3]['#text'],
+            img: result.data.topalbums?.album[0]?.image[3]['#text'],
          }));
          const renderedContent = artists.map((artist, i) => ({
             ...artist,

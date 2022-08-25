@@ -1,13 +1,10 @@
 import { useMemo, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { authSelector } from '../store/authSlice';
-import MD5 from 'crypto-js/md5';
+import { useDispatch } from 'react-redux';
+import { setIsPlaying, setTrackPosition } from '../store/playerSlice';
 import client from '../client';
 import { IoVolumeMediumOutline } from 'react-icons/io5';
 import styled from 'styled-components';
-function Track({ trackName, artistName, position }) {
-   const { token, secret, sk, api_key } = useSelector(authSelector);
-
+function Track({ trackName, artistName, id }) {
    //get info track
    const [infoTrack, setInfoTrack] = useState(null);
    useMemo(() => {
@@ -32,41 +29,25 @@ function Track({ trackName, artistName, position }) {
       return minutes + ':' + seconds;
    };
 
-   //request music data for listening
-   const handlePlay = async () => {
-      const url = 'http://ws.audioscrobbler.com/2.0/';
-      const api_sig = MD5(
-         `api_key${api_key}artist${infoTrack.artist.name}formatjsonmethodtrack.updateNowPlayingtoken${token + secret}`
-      );
-      const params = {
-         artist: infoTrack.artist.name, //2
-         track: infoTrack.track,
-         method: 'track.updateNowPlaying',
-         api_key, //1
-         sk,
-         api_sig,
-         format: 'json', //3
-      };
-      const res = await fetch(url, {
-         method: 'POST',
-         headers: {
-            'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
-         },
-         body: new URLSearchParams(params),
-      });
-      console.log(res);
+   //setPlayState (not togglePlayState)
+   const dispatch = useDispatch();
+   const setPlayState = (id) => {
+      dispatch(setIsPlaying(true));
+      dispatch(setTrackPosition(id));
    };
    return (
       infoTrack && (
-         <Container onClick={handlePlay}>
+         <Container onClick={() => setPlayState(id)}>
             <div>
-               <span> {correctPosition(position)}</span>
+               <span> {correctPosition(id + 1)}</span>
                <IoVolumeMediumOutline />
             </div>
-            <div>{infoTrack.name}</div>
-            <div>{infoTrack.artist.name}</div>
-            <div>{convertDuration(infoTrack.duration)}</div>
-            <div>{infoTrack.album?.title}</div>
+            <div className='track__name'>{infoTrack.name}</div>
+            <div className='track__artist-name'>{infoTrack.artist.name}</div>
+            <div className='track__duration'>
+               {convertDuration(infoTrack.duration)}
+            </div>
+            <div className='track__album'>{infoTrack.album?.title}</div>
          </Container>
       )
    );
@@ -76,6 +57,7 @@ export default Track;
 const Container = styled.section`
    display: flex;
    align-items: center;
+   gap: 1rem;
    height: 50px;
    padding: 0 1.5rem;
    border-radius: 1rem;
@@ -128,5 +110,13 @@ const Container = styled.section`
    }
    div:nth-child(5) {
       width: 20%;
+   }
+
+   .track__name,
+   .track__artist-name,
+   .track__album {
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
    }
 `;

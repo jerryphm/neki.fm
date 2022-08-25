@@ -7,7 +7,7 @@ import {
    setToken,
    setAuthorized,
    setSk,
-} from '../../store/authSlice'
+} from '../../store/authSlice';
 import neki from '../../assets/images/logo.png';
 import lastfm from '../../assets/images/lastfm.png';
 import styled from 'styled-components';
@@ -19,6 +19,9 @@ function Connect() {
    const { api_key, secret } = useSelector(authSelector);
    const handleConnect = () => {
       window.location.href = 'http://www.last.fm/api/auth/?api_key=' + api_key;
+   };
+   window.onkeyup = (e) => {
+      if (e.keyCode == 13) handleConnect();
    };
 
    //get token, session key and hide connect page, after redirecting
@@ -54,9 +57,7 @@ function Connect() {
    console.log('pass: mr-john-doe-1');
    console.groupEnd();
 
-   useEffect(() => {
-      return () => console.clear();
-   });
+   // useEffect(() => () => console.clear());
    return (
       !isAuthorizedState && (
          <Wrapper>
@@ -103,7 +104,8 @@ const Container = styled.section`
    align-items: center;
    justify-content: space-around;
    width: clamp(400px, 40vw, 700px);
-   min-height: 60vh;
+   height: 360px;
+   max-height: 70vh;
    padding: 0 30px;
    border-radius: 1.5rem;
    background-color: var(--white);

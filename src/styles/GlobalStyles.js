@@ -27,7 +27,7 @@ export const GlobalStyles = createGlobalStyle`
    --font5xl: 36px;
    --font6xl: 64px;
    --padding-x: 24px;
-   --padding-y: 16px;
+   --padding-y: 20px;
 
    --header-height: 80px;
    --footer-height: 100px;
@@ -72,5 +72,45 @@ export const GlobalStyles = createGlobalStyle`
       border: none;
       background-color: transparent;
       cursor: pointer;
+   }
+   /* css input track and thumb */
+   input {
+      -webkit-appearance: none;
+      appearance: none;
+      background: transparent;
+      cursor: pointer;
+   }
+   input::-webkit-slider-runnable-track {
+      background: var(--black);
+      height: 0.4rem;
+      border-radius: 5px;
+   }
+   input::-moz-range-track {
+      background: var(--black);
+      height: 0.4rem;
+      border-radius: 5px;
+   }
+   input::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      margin-top: -2px;
+      height: 0.8rem;
+      width: 0.8rem;
+      border: 2px solid var(--black);
+      border-radius: 1rem;
+      background-color: var(--white);
+      background-clip: content-box;
+   }
+   input::-moz-range-thumb {
+      border: none; /*Removes extra border that FF applies*/
+      border-radius: 0; /*Removes default border-radius that FF applies*/
+      background-color: var(--white);
+      height: 0.5rem;
+      width: 0.5rem;
+      border: 2px solid var(--black);
+      border-radius: 1rem;
+   }
+   input:focus {
+      outline: none;
    }
 `;
