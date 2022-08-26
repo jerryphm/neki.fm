@@ -54,7 +54,6 @@ function Connect() {
    console.log('pass: mr-john-doe-1');
    console.groupEnd();
 
-   useEffect(() => () => console.clear());
    return (
       !isAuthorizedState && (
          <Wrapper>

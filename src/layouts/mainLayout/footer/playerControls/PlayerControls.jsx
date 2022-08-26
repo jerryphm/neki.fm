@@ -188,7 +188,7 @@ function PlayerControls() {
       };
    }, [isPlaying, trackPosition]);
 
-   //rest time
+   //reset time
    const currentTimeTagRef = useRef();
    const totalTimeTagRef = useRef();
    const progressTagRef = useRef();
@@ -207,7 +207,6 @@ function PlayerControls() {
       dispatch(setVideoInfo(e.target.videoTitle));
    };
 
-   setTimeout(() => console.clear(), 1000);
    return (
       <Container>
          <YtFrame
