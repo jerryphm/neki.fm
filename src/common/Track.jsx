@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { setIsPlaying, setTrackPosition } from '../store/playerSlice';
 import client from '../client';
@@ -7,7 +7,7 @@ import styled from 'styled-components';
 function Track({ trackName, artistName, id }) {
    //get info track
    const [infoTrack, setInfoTrack] = useState(null);
-   useMemo(() => {
+   useEffect(() => {
       const getInfoTrack = async () => {
          const res = await client({
             url: `/?method=track.getInfo&artist=${artistName}&track=${trackName}`,
@@ -47,7 +47,7 @@ function Track({ trackName, artistName, id }) {
             <div className='track__duration'>
                {convertDuration(infoTrack.duration)}
             </div>
-            <div className='track__album'>{infoTrack.album?.title}</div>
+            <div className='track__album'>{infoTrack.album?.title || 'unknown album'}</div>
          </Container>
       )
    );
@@ -65,7 +65,7 @@ const Container = styled.section`
    font-size: var(--fontxs);
    color: var(--gray-text);
    cursor: pointer;
-   transform: 0.25s linear;
+   transition: 0.25s linear;
    &:not(first-child) {
       margin-top: 1rem;
    }

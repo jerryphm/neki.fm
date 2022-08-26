@@ -1,7 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-   tags: [],
+   tags: null,
+   homeTags: null,
    tagTopAlbums: null,
    tagTopArtists: null,
    tagTopTracks: null,
@@ -13,6 +14,9 @@ const tagSlice = createSlice({
    reducers: {
       setTags(state, action) {
          state.tags = action.payload;
+      },
+      setHomeTags(state, action) {
+         state.homeTags = action.payload;
       },
       setTagTopAlbums(state, action) {
          state.tagTopAlbums = action.payload;
@@ -27,5 +31,5 @@ const tagSlice = createSlice({
 });
 
 export const tagSelector = state => state.tag
-export const {setTags, setTagTopAlbums, setTagTopArtists, setTagTopTracks} = tagSlice.actions
+export const {setTags, setTagTopAlbums, setTagTopArtists, setTagTopTracks, setHomeTags} = tagSlice.actions
 export const tagReducer = tagSlice.reducer

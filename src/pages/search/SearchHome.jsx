@@ -1,33 +1,30 @@
 import styled from 'styled-components';
-import apiClient from '../../client';
+import client from '../../client';
 import { useSelector, useDispatch } from 'react-redux';
 import { tagSelector, setTags } from '../../store/tagSlice';
 import { useEffect } from 'react';
-import gradientColors from '../../assets/gradientColors';
 import { Link } from 'react-router-dom';
 import { BsMusicNote } from 'react-icons/bs';
 
 function SearchHome() {
    const dispatch = useDispatch();
    const { tags } = useSelector(tagSelector);
-   if (tags.length == 0) {
+   if (tags == null) {
       const getTags = async () => {
-         const res = await apiClient({
+         const res = await client({
             url: `/?method=tag.getTopTags`,
          });
-         const tags = res.data.toptags.tag.slice(0, 25);
-         for (let i = 0; i < 25; i++) {
-            tags[i] = { ...tags[i], ...gradientColors[i] };
-         }
+         const tags = res.data.toptags.tag.slice(0, 30);
          dispatch(setTags(tags));
       };
       getTags();
    }
+   //css
    useEffect(() => {
       const tags = document.querySelectorAll('.tag');
       let lastRandom;
       const timer = setInterval(() => {
-         const random = Math.floor(Math.random() * 25);
+         const random = Math.floor(Math.random() * 30);
          tags[random].classList.add('active');
          tags[lastRandom]?.classList.remove('active');
          lastRandom = random;
@@ -45,7 +42,7 @@ function SearchHome() {
    return (
       <Container>
          <h2>Most popular tags for you</h2>
-         {tags.map((tag, i) => (
+         {tags?.map((tag, i) => (
             <Link to={`tag/${correct(tag.name)}`} className='tag' key={i}>
                <p>{tag.name}</p>
                <BsMusicNote />

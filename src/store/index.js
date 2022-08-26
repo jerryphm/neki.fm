@@ -1,5 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { authReducer } from './authSlice';
+import { lovedSongReducer } from './lovedSongSlice';
 import { playerReducer } from './playerSlice';
 import { searchReducer } from './searchSlice';
 import { tagReducer } from './tagSlice';
@@ -11,7 +12,8 @@ const store = configureStore({
       search: searchReducer,
       tag: tagReducer,
       player: playerReducer,
-      trending: trendingReducer
+      trending: trendingReducer,
+      lovedSongs: lovedSongReducer,
    },
 });
 export default store;

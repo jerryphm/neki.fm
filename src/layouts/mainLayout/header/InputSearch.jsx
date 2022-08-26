@@ -34,12 +34,10 @@ function InputSearch() {
                   dispatch(setAlbums(albums));
                   dispatch(setArtists(artists));
                   dispatch(setTracks(tracks));
-                  
                   navigate(`/search/${searchTerm}`);
                } else {
                   navigate('/search/notfound');
                }
-
                setSearchTerm('');
             })
             .catch(() => alert('opps, something went wrong.Pls try again'));

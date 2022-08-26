@@ -1,16 +1,21 @@
 import { Track } from '.';
 import styled from 'styled-components';
 
-function Tracks({ tracks, display = 'Top Tracks' }) {
-   
+function Tracks({ tracks }) {
+   const getCorrectArtistName = (track) => {
+      if (typeof track.artist == 'object') {
+         return track.artist.name;
+      } else {
+         return track.artist;
+      }
+   };
    return (
       <Container>
-         <h2>{display}</h2>
          {tracks.map((track, i) => (
             <Track
                trackName={track.name}
-               artistName={track.artist}
-               id={i} // use id to show position, and use for player
+               artistName={getCorrectArtistName(track)}
+               id={i}
                key={i}
             />
          ))}
@@ -19,10 +24,4 @@ function Tracks({ tracks, display = 'Top Tracks' }) {
 }
 
 export default Tracks;
-const Container = styled.section`
-   h2 {
-      margin-top: 3rem;
-      margin-bottom: 2rem;
-      font-size: var(--fontxl);
-   }
-`;
+const Container = styled.section``;

@@ -16,22 +16,24 @@ function TrendingSong() {
    };
 
    useEffect(() => {
-      const getTop1Song = async () => {
-         const top1SongRes = await client({
-            url: `/?method=chart.gettoptracks&limit=1`,
-         });
-         const top1Song = top1SongRes.data.tracks.track[0];
+      if (top1Song == null) {
+         const getTop1Song = async () => {
+            const top1SongRes = await client({
+               url: `/?method=chart.gettoptracks&limit=1`,
+            });
+            const top1Song = top1SongRes.data.tracks.track[0];
 
-         //get album image to use with this song
-         const songInfoRes = await client({
-            url: `/?method=track.getInfo&artist=${top1Song.artist.name}&track=${top1Song.name}`,
-         });
-         const image = songInfoRes.data.track.album.image[3]['#text'];
-         top1Song.image = image;
-         dispatch(setTop1Song(top1Song));
-      };
-      getTop1Song();
-   }, []);
+            //get album image to use with this song
+            const songInfoRes = await client({
+               url: `/?method=track.getInfo&artist=${top1Song.artist.name}&track=${top1Song.name}`,
+            });
+            const image = songInfoRes.data.track.album.image[3]['#text'];
+            top1Song.image = image;
+            dispatch(setTop1Song(top1Song));
+         };
+         getTop1Song();
+      }
+   });
    return (
       <Container>
          <p>What's hot🔥</p>
@@ -57,11 +59,7 @@ function TrendingSong() {
                   <button onClick={handlePlaying}>PLAY</button>
                   <button>FOLLOW</button>
                </div>
-               <p className='home-trending-listeners'>
-                  Monthly listenner
-                  <br />
-                  <span>{top1Song?.listeners}</span>
-               </p>
+               <p></p>
             </div>
          </div>
       </Container>
@@ -145,15 +143,6 @@ const Container = styled.section`
                background-color: var(--black);
                color: var(--white);
             }
-         }
-         .home-trending-listeners {
-            position: absolute;
-            right: 2.4rem;
-            bottom: 1rem;
-            width: fit-content;
-            text-align: right;
-            color: #ccc;
-            font-size: 13px;
          }
       }
    }
