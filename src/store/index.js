@@ -3,6 +3,7 @@ import { authReducer } from './authSlice';
 import { playerReducer } from './playerSlice';
 import { searchReducer } from './searchSlice';
 import { tagReducer } from './tagSlice';
+import {trendingReducer} from './trendingSlice'
 
 const store = configureStore({
    reducer: {
@@ -10,6 +11,7 @@ const store = configureStore({
       search: searchReducer,
       tag: tagReducer,
       player: playerReducer,
+      trending: trendingReducer
    },
 });
 export default store;

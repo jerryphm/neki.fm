@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
-import { authSelector } from '../../../store/authSlice';
+import { useSelector, useDispatch } from 'react-redux';
+import { authSelector, setUserInfo } from '../../../store/authSlice';
 import { NavLink } from 'react-router-dom';
 import client from '../../../client';
 
@@ -13,18 +13,16 @@ import { TbLayoutSidebarRightExpand } from 'react-icons/tb';
 import styled from 'styled-components';
 
 function Sidebar() {
-   const [userName, setUserName] = useState('');
-   const [userAvatar, setUserAvatar] = useState('');
-   const { sk } = useSelector(authSelector);
+   const dispatch = useDispatch()
+   const { sk, userInfo } = useSelector(authSelector);
    useEffect(() => {
       const getUserInfo = async () => {
          const res = await client({
             url: `/?method=user.getInfo&sk=${sk}`,
          });
-         const userName = res.data.user.name;
-         const userAvatar = res.data.user.image[3]['#text'] || avatarFallback;
-         setUserName(userName);
-         setUserAvatar(userAvatar);
+         const name = res.data.user.name;
+         const avatar = res.data.user.image[3]['#text'] || avatarFallback;
+         dispatch(setUserInfo({name, avatar}))
       };
       getUserInfo();
    }, []);
@@ -65,8 +63,8 @@ function Sidebar() {
             ))}
          </nav>
          <div className='sidebar__user'>
-            <img src={userAvatar} />
-            <span>{userName}</span>
+            <img src={userInfo?.avatar} />
+            <span>{userInfo?.name}</span>
          </div>
       </Container>
    );

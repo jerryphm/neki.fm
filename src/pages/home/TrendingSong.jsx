@@ -1,13 +1,14 @@
 import { useState, useEffect } from 'react';
 import client from '../../client';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { setTop1Song, trendingSelector } from '../../store/trendingSlice';
 import { Link } from 'react-router-dom';
 import { setIsPlaying, setTrackPosition } from '../../store/playerSlice';
 import styled from 'styled-components';
 import { VscChevronRight } from 'react-icons/vsc';
 
 function TrendingSong() {
-   const [top1Song, setTop1Song] = useState('');
+   const { top1Song } = useSelector(trendingSelector);
    const dispatch = useDispatch();
    const handlePlaying = () => {
       dispatch(setIsPlaying(true));
@@ -27,7 +28,7 @@ function TrendingSong() {
          });
          const image = songInfoRes.data.track.album.image[3]['#text'];
          top1Song.image = image;
-         setTop1Song(top1Song);
+         dispatch(setTop1Song(top1Song));
       };
       getTop1Song();
    }, []);
@@ -43,7 +44,7 @@ function TrendingSong() {
          <div
             className='home-trending-card'
             style={{
-               backgroundImage: `url(${top1Song.image})`,
+               backgroundImage: `url(${top1Song?.image})`,
             }}
          >
             <div className='home-trending-card__overlay'></div>

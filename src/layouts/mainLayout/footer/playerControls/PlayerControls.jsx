@@ -117,13 +117,14 @@ function PlayerControls() {
          youtubeRef.current.internalPlayer.playVideo();
       }
    };
+   //support for autoplay when click to a track or button
    useEffect(() => {
       if (isPlaying) {
-         youtubeRef.current.internalPlayer.playVideo()
+         youtubeRef.current.internalPlayer.playVideo();
       } else {
-         youtubeRef.current.internalPlayer.pauseVideo()
+         youtubeRef.current.internalPlayer.pauseVideo();
       }
-   }, [isPlaying])
+   }, [isPlaying]);
    //set volume
    const setVolume = (value) => {
       youtubeRef.current.internalPlayer.setVolume(value);
@@ -181,7 +182,6 @@ function PlayerControls() {
                currentSecond = currentTime;
             })();
          }, 1000);
-
          //progress
          const progressTag = document.querySelector('.progress-bar');
          progressInteval = setInterval(() => {
