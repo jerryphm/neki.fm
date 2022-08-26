@@ -28,6 +28,7 @@ const initialState = {
    ],
    isPlaying: false,
    trackPosition: 0,
+   videoInfo: ''
 };
 const playerSlice = createSlice({
    name: 'player',
@@ -42,10 +43,12 @@ const playerSlice = createSlice({
       setIsPlaying(state, action) {
          state.isPlaying = action.payload;
       },
+      setVideoInfo(state, action) {
+         state.videoInfo = action.payload
+      }
    },
 });
-
 export const playerSelector = (state) => state.player;
-export const { setTrackIds, setTrackPosition, setIsPlaying } =
+export const { setTrackIds, setTrackPosition, setIsPlaying, setVideoInfo } =
    playerSlice.actions;
 export const playerReducer = playerSlice.reducer;

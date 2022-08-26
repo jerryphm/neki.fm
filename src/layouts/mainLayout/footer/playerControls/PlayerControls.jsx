@@ -1,7 +1,11 @@
-import { useRef, useEffect, useMemo, useState } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import YouTube from 'react-youtube';
 import { useSelector, useDispatch } from 'react-redux';
-import { setIsPlaying, setTrackPosition } from '../../../../store/playerSlice';
+import {
+   setIsPlaying,
+   setTrackPosition,
+   setVideoInfo,
+} from '../../../../store/playerSlice';
 import { playerSelector } from '../../../../store/playerSlice';
 import { RiHeart2Line as LoveIcon } from 'react-icons/ri';
 import {
@@ -25,7 +29,6 @@ function PlayerControls() {
    const { isPlaying, trackIds, trackPosition } = useSelector(playerSelector);
    const dispatch = useDispatch();
    const youtubeRef = useRef(null);
-
    //set loop (none/single/all)
    const [loopType, setLoopType] = useState(0);
    const setLoop = (loopIcon) => {
@@ -44,7 +47,6 @@ function PlayerControls() {
          setLoopType(0);
       }
    };
-
    //shuffle
    const [isShuffle, setIsShuffle] = useState(false);
    const setShuffle = () => {
@@ -61,7 +63,6 @@ function PlayerControls() {
       }
       getRandomPosition();
    };
-
    // next and previous song
    const setPrevNext = (type, BtnType) => {
       let position;
@@ -105,7 +106,6 @@ function PlayerControls() {
          for (let tag of prevNextTags) tag.classList.remove('disable');
       }, 4000);
    };
-
    //toggle play/pause btn
    const togglePlayState = () => {
       dispatch(setIsPlaying(!isPlaying));
@@ -197,10 +197,14 @@ function PlayerControls() {
       progressTagRef.current.value = 0;
       totalTimeTagRef.current.innerHTML = '0:00';
    }
-
+   //support for
+   //_ changing play state when start playing new song
+   //_ getting globalTime
+   //_ set video info (support PlayerInfo component)
    const handleStateChange = (e) => {
       autoplayBasedOnStates(e.data);
       getTotalTime(e.target);
+      dispatch(setVideoInfo(e.target.videoTitle));
    };
 
    setTimeout(() => console.clear(), 1000);
@@ -280,7 +284,7 @@ const Container = styled.section`
 `;
 
 const YtFrame = styled(YouTube)`
-   /* display: none; */
+   display: none;
    position: absolute;
    top: -60vh;
    left: 0;

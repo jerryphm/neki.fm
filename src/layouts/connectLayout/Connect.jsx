@@ -20,9 +20,6 @@ function Connect() {
    const handleConnect = () => {
       window.location.href = 'http://www.last.fm/api/auth/?api_key=' + api_key;
    };
-   window.onkeyup = (e) => {
-      if (e.keyCode == 13) handleConnect();
-   };
 
    //get token, session key and hide connect page, after redirecting
    const dispatch = useDispatch();
@@ -57,7 +54,7 @@ function Connect() {
    console.log('pass: mr-john-doe-1');
    console.groupEnd();
 
-   // useEffect(() => () => console.clear());
+   useEffect(() => () => console.clear());
    return (
       !isAuthorizedState && (
          <Wrapper>
@@ -83,7 +80,11 @@ function Connect() {
                      <p>LastFM</p>
                   </Logo>
                </Logos>
-               <Button onClick={handleConnect}>Connect</Button>
+               <Button
+                  onClick={handleConnect}
+               >
+                  Connect
+               </Button>
             </Container>
          </Wrapper>
       )
