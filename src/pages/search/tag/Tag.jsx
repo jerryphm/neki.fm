@@ -24,7 +24,6 @@ function Tag() {
             const albums = results[1].data.albums.album;
             const artists = results[2].data.topartists.artist;
             const tracks = results[3].data.tracks.track;
-            console.log({ intro, albums, artists, tracks });
             setInfo({ intro, albums, artists, tracks });
          })
          .catch(() => alert('opps! something went wrong'));

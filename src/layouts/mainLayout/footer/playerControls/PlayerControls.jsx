@@ -117,6 +117,13 @@ function PlayerControls() {
          youtubeRef.current.internalPlayer.playVideo();
       }
    };
+   useEffect(() => {
+      if (isPlaying) {
+         youtubeRef.current.internalPlayer.playVideo()
+      } else {
+         youtubeRef.current.internalPlayer.pauseVideo()
+      }
+   }, [isPlaying])
    //set volume
    const setVolume = (value) => {
       youtubeRef.current.internalPlayer.setVolume(value);

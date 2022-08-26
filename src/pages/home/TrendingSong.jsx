@@ -11,7 +11,7 @@ function TrendingSong() {
    const dispatch = useDispatch();
    const handlePlaying = () => {
       dispatch(setIsPlaying(true));
-      dispatch(setTrackPosition(1));
+      dispatch(setTrackPosition(0));
    };
 
    useEffect(() => {
