@@ -1,9 +1,60 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import client from '../../client';
+import styled from 'styled-components';
+
+import { Banner, Tracks } from '../../common';
+import { Albums } from '../search/tag';
+import SimilarsArtists from './SimilarsArtists';
 
 function Artist() {
-  return (
-    <div>Artist</div>
-  )
+   const { artistName } = useParams();
+   const [artistInfo, setArtistInfo] = useState(null);
+   const [tracks, setTracks] = useState(null);
+   const [albums, setAlbums] = useState(null);
+
+   useEffect(() => {
+      const getArtistData = (type, limit) =>
+         client({
+            url: `/?method=artist.get${type}&artist=${artistName}&limit=${limit}`,
+         });
+      Promise.all([
+         getArtistData('info'),
+         getArtistData('toptracks', 10),
+         getArtistData('topalbums', 10),
+      ]).then((results) => {
+         const artistInfo = results[0].data.artist;
+         const topTracks = results[1].data.toptracks.track;
+         const topAlbum = results[2].data.topalbums.album;
+         setArtistInfo(artistInfo);
+         setTracks(topTracks);
+         setAlbums(topAlbum);
+      });
+   }, []);
+
+   return (
+      artistInfo && (
+         <Container>
+            <Banner info={artistInfo} />
+            <h2>Top Tracks</h2>
+            <Tracks tracks={tracks} />
+            <Albums albums={albums} />
+            <h2>Similars to {artistName}</h2>
+            <SimilarsArtists similars={artistInfo.similar.artist} />
+         </Container>
+      )
+   );
 }
 
-export default Artist
+export default Artist;
+const Container = styled.section`
+   height: calc(100vh - 19rem);
+   overflow: scroll;
+   h2 {
+      margin: 3rem 0 1.5rem;
+      font-size: var(--font2xl);
+   }
+   h2:last-child {
+      margin: 2rem 0 1.5rem;
+   }
+`;

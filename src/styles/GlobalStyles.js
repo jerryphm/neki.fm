@@ -72,7 +72,14 @@ export const GlobalStyles = createGlobalStyle`
       border: none;
       background-color: transparent;
       cursor: pointer;
+      
    }
+   .ellipsis {
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+   }
+   
    /* css input track and thumb */
    input {
       -webkit-appearance: none;

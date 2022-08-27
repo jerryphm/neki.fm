@@ -60,7 +60,7 @@ const Container = styled.section`
    overflow: scroll;
    & > h2 {
       font-size: var(--fontxl);
-      margin-bottom: 1rem;
+      margin-bottom: 1.5rem;
    }
    & > div {
       display: flex;

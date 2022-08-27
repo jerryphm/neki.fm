@@ -1,19 +1,22 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import fallbackImage from '../../assets/images/fallback.jpg';
 
 function ArtistCard({ artist }) {
-   const correct = (listener) => {
-      return listener.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+   const correct = (listeners) => {
+      return listeners.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
    };
-   const correctName = (name) => {
-      return name.toLowerCase().split(' ').join('');
-   };
+   const getCorrectImg = (artist) => {
+      return artist.avatar || fallbackImage
+   }
    return (
-      <Container style={{ backgroundImage: `url(${artist.avatar})` }}>
+      <Container
+         style={{ backgroundImage: `url(${getCorrectImg(artist)})` }}
+      >
          <div className='artist-card__overlay'></div>
          <div className='artist-card__info'>
-            <Link to={correctName(artist.name)}>{artist.name}</Link>
+            <Link to={artist.name}>{artist.name}</Link>
             <p>{correct(artist.listeners)} listeners</p>
          </div>
       </Container>

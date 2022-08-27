@@ -18,7 +18,7 @@ function UserPlaylist() {
       if (lovedSongs == null && userInfo) {
          const getUserLovedSongs = async () => {
             const lovedSongRes = await client({
-               url: `/?method=user.getlovedtracks&user=${userInfo.name}`,
+               url: `/?method=user.getlovedtracks&user=${userInfo.name}&limit=15`,
             });
             const songs = lovedSongRes.data.lovedtracks.track;
             dispatch(setLovedSongs(songs));

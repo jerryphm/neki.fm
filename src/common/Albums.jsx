@@ -31,7 +31,7 @@ function Albums({ albums }) {
 export default Albums;
 
 const Container = styled.section`
-   margin: 3rem 0 10rem;
+   margin-top: 3rem;
    h2 {
       font-size: var(--fontxl);
       margin-bottom: 1rem;
@@ -52,7 +52,7 @@ const Container = styled.section`
          user-select: none;
          box-shadow: 0 0 5px #e7e5e5;
          @media only screen and (max-width: 850px) {
-            width: calc(33% - 1.3333%);
+            width: calc(33% - 1.27%);
          }
          & > span {
             position: absolute;

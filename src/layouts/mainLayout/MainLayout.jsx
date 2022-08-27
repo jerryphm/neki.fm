@@ -23,7 +23,7 @@ const Container = styled.section`
    display: flex;
    height: 100vh;
    max-width: 1340px;
-   min-width: 720px;
+   min-width: 800px;
    overflow: hidden;
    section.right-side-cmp {
       position: relative;

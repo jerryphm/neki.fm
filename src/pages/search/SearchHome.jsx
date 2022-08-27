@@ -15,7 +15,7 @@ function SearchHome() {
             const res = await client({
                url: `/?method=tag.getTopTags`,
             });
-            const tags = res.data.toptags.tag.slice(0, 30);
+            const tags = res.data.toptags.tag.slice(0, 25); //'limit' url param not working
             dispatch(setTags(tags));
          };
          getTags();

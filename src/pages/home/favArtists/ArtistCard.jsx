@@ -4,11 +4,6 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 function ArtistCard({ avatar, name, playcount }) {
-   const correct = (name) => {
-      const toLc = name.toLowerCase();
-      const rmSpaces = toLc.split(' ').join('');
-      return rmSpaces;
-   };
    return (
       <Container>
          <div style={{ backgroundImage: `url(${avatar})` }} />
@@ -16,7 +11,7 @@ function ArtistCard({ avatar, name, playcount }) {
             <h4>{name}</h4>
             <p>Playcount: {playcount}</p>
          </div>
-         <Link to={`artists/${correct(name)}`}>
+         <Link to={`artists/${name}`}>
             <BiNavigation />
          </Link>
       </Container>
@@ -48,13 +43,14 @@ const Container = styled.section`
       h4,
       p {
          line-height: 1;
+         overflow: hidden;
+         text-overflow: ellipsis;
+         white-space: nowrap;
       }
       h4 {
          font-size: var(--fontbase);
          font-weight: normal;
-         overflow: hidden;
-         text-overflow: ellipsis;
-         white-space: nowrap;
+         
       }
       p {
          font-size: 14px;
