@@ -1,32 +1,38 @@
 import React from 'react';
 import styled from 'styled-components';
+import fallbackImage from '../../../assets/images/fallback.jpg'
 
 function Albums({ albums }) {
+   const getImage = (album) => album.image[3]['#text'] || fallbackImage
    return (
-      <Container>
-         <h2>Top Albums</h2>
-         <div>
-            {albums.map((album, i) => (
-               <a
-                  href='#'
-                   style={{ backgroundImage: `url(${album.image[3]['#text']})` }}
-                  key={i}
-               >
-                  <span>
-                     <span>{album.name}</span>
-                     <br />
-                     Artist: {album.artist}
-                  </span>
-               </a>
-            ))}
-         </div>
-      </Container>
+      albums[0] && (
+         <Container>
+            <h2>Top Albums</h2>
+            <div>
+               {albums.map((album, i) => (
+                  <a
+                     href='#'
+                     style={{
+                        backgroundImage: `url(${getImage(album)})`,
+                     }}
+                     key={i}
+                  >
+                     <span>
+                        <span>{album.name}</span>
+                        <br />
+                        Artist: {album.artist}
+                     </span>
+                  </a>
+               ))}
+            </div>
+         </Container>
+      )
    );
 }
 
 export default Albums;
 const Container = styled.section`
-margin-top: 3rem;
+   margin-top: 3rem;
    h2 {
       margin-top: 1rem;
       margin-bottom: 2rem;

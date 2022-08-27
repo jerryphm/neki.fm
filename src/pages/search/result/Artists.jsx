@@ -1,33 +1,38 @@
-import { useState } from 'react';
-import apiClient from '../../../client';
+import { useState, useEffect } from 'react';
+import client from '../../../client';
 import styled from 'styled-components';
-import { useMemo } from 'react';
+import fallbackImage from '../../../assets/images/fallback.jpg'
+
 
 function Artists({ artists }) {
    let [renderedContent, setRenderedContent] = useState(null);
-   useMemo(() => {
-      const getProfilePicture = async (artistName) => {
-         return apiClient({
-            url: `/?method=artist.gettopalbums&artist=${artistName}&limit=1`,
+   useEffect(() => {
+      if (artists[0]) {
+         //although Server response data with 200 status, data is empty array
+         const getProfilePicture = async (artistName) => {
+            return client({
+               url: `/?method=artist.gettopalbums&artist=${artistName}&limit=1`,
+            });
+         };
+         Promise.all([
+            getProfilePicture(artists[0].name),
+            getProfilePicture(artists[1].name),
+            getProfilePicture(artists[2].name),
+            getProfilePicture(artists[3].name),
+            getProfilePicture(artists[4].name),
+         ]).then((results) => {
+            const profilePictures = results.map((result) => ({
+               img: result.data.topalbums?.album[0]?.image[3]['#text'],
+            }));
+            const renderedContent = artists.map((artist, i) => ({
+               ...artist,
+               ...profilePictures[i],
+            }));
+            setRenderedContent(renderedContent);
          });
-      };
-      Promise.all([
-         getProfilePicture(artists[0].name),
-         getProfilePicture(artists[1].name),
-         getProfilePicture(artists[2].name),
-         getProfilePicture(artists[3].name),
-         getProfilePicture(artists[4].name),
-      ]).then((results) => {
-         const profilePictures = results.map((result) => ({
-            img: result.data.topalbums?.album[0]?.image[3]['#text'],
-         }));
-         const renderedContent = artists.map((artist, i) => ({
-            ...artist,
-            ...profilePictures[i],
-         }));
-         setRenderedContent(renderedContent);
-      });
+      }
    }, [artists]);
+   const getImage = (image) => image || fallbackImage
 
    return (
       renderedContent && (
@@ -37,7 +42,7 @@ function Artists({ artists }) {
                {renderedContent.map((r, i) => (
                   <a
                      href='#'
-                     style={{ backgroundImage: `url(${r.img})` }}
+                     style={{ backgroundImage: `url(${getImage(r.img)})` }}
                      key={i}
                   >
                      <span>

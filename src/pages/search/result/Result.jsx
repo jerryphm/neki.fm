@@ -10,7 +10,7 @@ function Result() {
 
    return (
       <Container>
-         <h1>Results for "{resultKeyWord}"🔥</h1>
+         <h1>Results for "{resultKeyWord}"🔥</h1>  
          <Artists artists={artists} />
          <div>
             <h2>Top Tracks</h2>
