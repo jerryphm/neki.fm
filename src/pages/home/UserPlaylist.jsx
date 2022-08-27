@@ -7,10 +7,12 @@ import styled from 'styled-components';
 import client from '../../client';
 import { Tracks } from '../../common';
 import { AiOutlineClockCircle } from 'react-icons/ai';
+import { useState } from 'react';
 
 function UserPlaylist() {
    const { lovedSongs } = useSelector(lovedSongSelector);
    const { userInfo } = useSelector(authSelector);
+   const [isShowMore, setShowMore] = useState(false);
    const dispatch = useDispatch();
    useEffect(() => {
       if (lovedSongs == null && userInfo) {
@@ -24,11 +26,14 @@ function UserPlaylist() {
          getUserLovedSongs();
       }
    }, [lovedSongs, userInfo]);
+   let renderedLovedSongs = isShowMore ? lovedSongs : lovedSongs?.slice(0, 5);
    return (
       <Container>
          <div className='home-playlist-title'>
             <h2>My Playlist</h2>
-            <button>Show More</button>
+            <button onClick={() => setShowMore(!isShowMore)}>
+               {isShowMore ? 'Show Less' : 'Show More'}
+            </button>
          </div>
          <div className='home-playlist-tracks'>
             <div className='home-playlist-tracks__heading'>
@@ -40,7 +45,7 @@ function UserPlaylist() {
                </span>
                <span>ALBUM</span>
             </div>
-            {lovedSongs && <Tracks tracks={lovedSongs} />}
+            {renderedLovedSongs && <Tracks tracks={renderedLovedSongs} />}
          </div>
       </Container>
    );

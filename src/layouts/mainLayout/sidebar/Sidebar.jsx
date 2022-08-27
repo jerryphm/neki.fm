@@ -10,10 +10,11 @@ import { RiHome5Line } from 'react-icons/ri';
 import { BiChart, BiAlbum } from 'react-icons/bi';
 import { FiSearch } from 'react-icons/fi';
 import { TbLayoutSidebarRightExpand } from 'react-icons/tb';
+import { GiSeaStar } from 'react-icons/gi';
 import styled from 'styled-components';
 
 function Sidebar() {
-   const dispatch = useDispatch()
+   const dispatch = useDispatch();
    const { sk, userInfo } = useSelector(authSelector);
    useEffect(() => {
       const getUserInfo = async () => {
@@ -22,7 +23,7 @@ function Sidebar() {
          });
          const name = res.data.user.name;
          const avatar = res.data.user.image[3]['#text'] || avatarFallback;
-         dispatch(setUserInfo({name, avatar}))
+         dispatch(setUserInfo({ name, avatar }));
       };
       getUserInfo();
    }, []);
@@ -32,6 +33,7 @@ function Sidebar() {
       { to: '/search', icon: <FiSearch />, display: 'Search' },
       { to: '/trend', icon: <BiChart />, display: 'Trend' },
       { to: '/songs', icon: <BiAlbum />, display: 'Songs' },
+      { to: '/artists', icon: <GiSeaStar />, display: 'Artists' },
    ];
    const toggleSideBarWidth = () => {
       const rawContainer = document.getElementsByTagName('aside');
@@ -154,7 +156,7 @@ const Container = styled.aside`
       padding: 0 var(--padding-x);
       border-top: 1px solid var(--light-gray-text);
       user-select: none;
-      transition: .25s linear;
+      transition: 0.25s linear;
       img {
          width: 3rem;
          height: 3rem;
@@ -181,7 +183,7 @@ const Container = styled.aside`
          transform: rotate(180deg);
       }
       .sidebar__user {
-         gap: 0;  
+         gap: 0;
       }
    }
 `;

@@ -32,7 +32,7 @@ function RouteManager() {
                {/* Songs */}
                <Route path='songs' element={<Songs />}></Route>
                {/* Aritsts */}
-               <Route path='artist' element={<Outlet />}>
+               <Route path='artists' element={<Outlet />}>
                   <Route index element={<ArtistHome />} />
                   <Route path=':artistName' element={<Artist />} />
                </Route>
