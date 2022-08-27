@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { TrendingSong, TopTags, UserPlaylist, FavorArtists } from './index';
+import { TrendingSong, TopTags, UserPlaylist, FavArtists } from './index';
 
 function Home() {
    return (
@@ -11,7 +11,7 @@ function Home() {
          </Col>
          <Col>
          	<TopTags />
-	         <FavorArtists />
+	         <FavArtists />
          </Col>
       </Container>
    );
@@ -27,12 +27,12 @@ const Container = styled.section`
 	height: calc( 100vh - 18rem);
 	overflow: scroll;
 	& > div:first-child {
-		width: 70%;
+		width: 67%;
 		flex-shrink: 0;
 		flex-grow: 0;
 	}
 	& > div:last-child {
-		width: 26%;
+		width: 29%;
 		flex-shrink: 0;
 		flex-grow: 0;
 	}

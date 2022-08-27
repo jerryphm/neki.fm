@@ -33,7 +33,7 @@ function TrendingSong() {
          };
          getTop1Song();
       }
-   });
+   }, []);
    return (
       <Container>
          <p>What's hot🔥</p>

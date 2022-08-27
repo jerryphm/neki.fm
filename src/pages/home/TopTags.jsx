@@ -24,8 +24,7 @@ function TopTags() {
          };
          getHomeTags();
       }
-   });
-   console.log(homeTags);
+   }, []);
    const correct = (tagName) => {
       let toLc = tagName.toLowerCase();
       let rmHyphensSpace = toLc.split(/ |-/).join('');

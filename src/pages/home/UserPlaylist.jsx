@@ -6,28 +6,24 @@ import { lovedSongSelector, setLovedSongs } from '../../store/lovedSongSlice';
 import styled from 'styled-components';
 import client from '../../client';
 import { Tracks } from '../../common';
-import {AiOutlineClockCircle} from 'react-icons/ai'
+import { AiOutlineClockCircle } from 'react-icons/ai';
 
 function UserPlaylist() {
    const { lovedSongs } = useSelector(lovedSongSelector);
-   const { sk } = useSelector(authSelector);
+   const { userInfo } = useSelector(authSelector);
    const dispatch = useDispatch();
    useEffect(() => {
-      if (lovedSongs == null) {
+      if (lovedSongs == null && userInfo) {
          const getUserLovedSongs = async () => {
-            const userNameRes = await client({
-               url: `/?method=user.getinfo&sk=${sk}`,
-            });
-            const userName = userNameRes.data.user.name;
             const lovedSongRes = await client({
-               url: `/?method=user.getlovedtracks&user=${userName}`,
+               url: `/?method=user.getlovedtracks&user=${userInfo.name}`,
             });
             const songs = lovedSongRes.data.lovedtracks.track;
             dispatch(setLovedSongs(songs));
          };
          getUserLovedSongs();
       }
-   }, []);
+   }, [lovedSongs, userInfo]);
    return (
       <Container>
          <div className='home-playlist-title'>
@@ -39,7 +35,9 @@ function UserPlaylist() {
                <span>#</span>
                <span>TITLE</span>
                <span>ARTIST</span>
-               <span><AiOutlineClockCircle/></span>
+               <span>
+                  <AiOutlineClockCircle />
+               </span>
                <span>ALBUM</span>
             </div>
             {lovedSongs && <Tracks tracks={lovedSongs} />}
@@ -77,7 +75,7 @@ const Container = styled.section`
          color: var(--light-gray-text);
          cursor: pointer;
          transition: 0.25s linear;
-         
+
          span:first-child {
             position: relative;
             width: 3rem;
@@ -95,9 +93,9 @@ const Container = styled.section`
             }
          }
          span:nth-child(4) {
-				display: flex;
-				align-items: center;
-				justify-content: end;
+            display: flex;
+            align-items: center;
+            justify-content: end;
             width: 4rem;
             text-align: right;
             margin-right: 4rem;
@@ -112,5 +110,5 @@ const Container = styled.section`
             width: 20%;
          }
       }
-   }		
+   }
 `;

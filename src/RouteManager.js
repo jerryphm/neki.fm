@@ -1,6 +1,14 @@
 import App from './App';
 import { BrowserRouter, Routes, Route, Outlet } from 'react-router-dom';
-import { Home, Search, Trend, Songs, NotFound } from './pages';
+import {
+   Home,
+   Search,
+   Trend,
+   Songs,
+   NotFound,
+   ArtistHome,
+   Artist,
+} from './pages';
 import { SearchHome, Result, SearchNotFound, Tag } from './pages/search';
 
 function RouteManager() {
@@ -23,6 +31,11 @@ function RouteManager() {
                <Route path='trend' element={<Trend />}></Route>
                {/* Songs */}
                <Route path='songs' element={<Songs />}></Route>
+               {/* Aritsts */}
+               <Route path='artist' element={<Outlet />}>
+                  <Route index element={<ArtistHome />} />
+                  <Route path=':artistName' element={<Artist />} />
+               </Route>
                {/* Not found */}
                <Route path='*' element={<NotFound />}></Route>
             </Route>
