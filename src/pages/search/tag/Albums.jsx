@@ -43,8 +43,7 @@ const Container = styled.section`
 
       a {
          position: relative;
-         width: calc((100% - 6%) / 4);
-         min-width: 150px;
+         width: 23.5%;
          padding-top: 26%;
          margin-bottom: 2rem;
          background: no-repeat center/cover;
@@ -52,12 +51,18 @@ const Container = styled.section`
          overflow: hidden;
          user-select: none;
          box-shadow: 0 0 5px #e7e5e5;
+         @media only screen and (max-width: 850px) {
+            width: calc(33% - 1.3333%);
+         }
          & > span {
             position: absolute;
             left: 0;
             right: 0;
             bottom: 0;
-            display: inline-block;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: clamp(5rem, 25%, 6rem);
             background-color: var(--white);
             padding: 5px 1rem;
             border-bottom-left-radius: 1rem;
@@ -74,9 +79,9 @@ const Container = styled.section`
          }
          button {
             position: absolute;
-            top: 50%;
+            top: 45%;
             left: 50%;
-            height: 38px;
+            height: clamp(38px, 20%, 42px);
             width: fit-content;
             padding: 0 1.4rem;
             border-radius: 5rem;
@@ -85,9 +90,8 @@ const Container = styled.section`
             color: var(--black);
             font-size: var(--fontxs);
             white-space: nowrap;
-
             opacity: 0;
-            transform: translate(-50%, -5%);
+            transform: translate(-50%, -8%);
             visibility: hidden;
             transition: 0.25s linear;
             svg {

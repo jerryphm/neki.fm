@@ -16,7 +16,7 @@ function ArtistCard({ avatar, name, playcount }) {
             <h4>{name}</h4>
             <p>Playcount: {playcount}</p>
          </div>
-         <Link to={`artist/${correct(name)}`}>
+         <Link to={`artists/${correct(name)}`}>
             <BiNavigation />
          </Link>
       </Container>

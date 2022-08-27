@@ -9,29 +9,33 @@ import { BsMusicNote } from 'react-icons/bs';
 function SearchHome() {
    const dispatch = useDispatch();
    const { tags } = useSelector(tagSelector);
-   if (tags == null) {
-      const getTags = async () => {
-         const res = await client({
-            url: `/?method=tag.getTopTags`,
-         });
-         const tags = res.data.toptags.tag.slice(0, 30);
-         dispatch(setTags(tags));
-      };
-      getTags();
-   }
+   useEffect(() => {
+      if (tags == null) {
+         const getTags = async () => {
+            const res = await client({
+               url: `/?method=tag.getTopTags`,
+            });
+            const tags = res.data.toptags.tag.slice(0, 30);
+            dispatch(setTags(tags));
+         };
+         getTags();
+      }
+   }, []);
    //css
    useEffect(() => {
-      const tags = document.querySelectorAll('.tag');
-      let lastRandom;
-      const timer = setInterval(() => {
-         const random = Math.floor(Math.random() * 30);
-         tags[random].classList.add('active');
-         tags[lastRandom]?.classList.remove('active');
-         lastRandom = random;
-      }, 3000);
-      return () => {
-         clearInterval(timer);
-      };
+      if (tags) {
+         const tags = document.querySelectorAll('.tag');
+         let lastRandom;
+         const timer = setInterval(() => {
+            const random = Math.floor(Math.random() * 30);
+            tags[random].classList.add('active');
+            tags[lastRandom]?.classList.remove('active');
+            lastRandom = random;
+         }, 2500);
+         return () => {
+            clearInterval(timer);
+         };
+      }
    });
    const correct = (tagName) => {
       let toLc = tagName.toLowerCase();

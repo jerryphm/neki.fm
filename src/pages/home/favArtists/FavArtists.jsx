@@ -40,7 +40,6 @@ function FavArtists() {
          getFavArtists();
       }
    }, [userInfo, favArtists]);
-   console.log(favArtists)
    return <Container>
       <h2>Fav Artists</h2>
       {favArtists?.map((artist, i) => (
