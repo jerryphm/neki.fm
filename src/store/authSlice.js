@@ -7,7 +7,7 @@ const initialState = {
    token: '',
    api_sig: '',
    sk: '',
-   userInfo: ''
+   userInfo: '',
 };
 const authSlice = createSlice({
    name: 'auth',
@@ -31,5 +31,6 @@ const authSlice = createSlice({
    },
 });
 export const authSelector = (state) => state.auth;
-export const { setToken, setAuthorized, setApiSig, setSk, setUserInfo } = authSlice.actions;
+export const { setToken, setAuthorized, setApiSig, setSk, setUserInfo } =
+   authSlice.actions;
 export const authReducer = authSlice.reducer;

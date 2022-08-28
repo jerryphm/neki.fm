@@ -13,7 +13,6 @@ import lastfm from '../../assets/images/lastfm.png';
 import styled from 'styled-components';
 
 function Connect() {
-   const homepage = window.location.href;
    const [isAuthorizedState, setAuthorizedState] = useState(false);
 
    //request authorization from the user
@@ -26,9 +25,11 @@ function Connect() {
    const dispatch = useDispatch();
    const url = window.location.href;
    useLayoutEffect(() => {
-      if (url.includes('?token=') || url.includes('&token=')) {
+      if (url.includes('?token=')) { //server redirects to the homepage with only 'token' param
          setAuthorizedState(true);
-         const token = url.split('token=')[1];
+         const arr = url.split('?token=')
+         const token = arr[1]
+         const homepage = arr[0]
          const getSk = async () => {
             try {
                const api_sig = MD5(
@@ -41,7 +42,7 @@ function Connect() {
                dispatch(setAuthorized(true));
                dispatch(setToken(token));
             } catch {
-               window.location.href = homepage;
+               window.location.href = homepage
             }
          };
          getSk();
