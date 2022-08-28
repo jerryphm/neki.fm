@@ -1,14 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
 import { TbSend } from 'react-icons/tb';
+import { Link } from 'react-router-dom';
 
 function Albums({ albums }) {
    return (
       <Container>
          <div>
             {albums.map((album, i) => (
-               <a
-                  href='#'
+               <Link
+                  to={`/albums/${album.name + '-' + album.artist.name}`}
                   style={{ backgroundImage: `url(${album.image[3]['#text']})` }}
                   key={i}
                >
@@ -20,7 +21,7 @@ function Albums({ albums }) {
                   <button>
                      Discover <TbSend />
                   </button>
-               </a>
+               </Link>
             ))}
          </div>
       </Container>
@@ -78,7 +79,7 @@ const Container = styled.section`
             left: 50%;
             height: clamp(38px, 20%, 42px);
             width: fit-content;
-            padding: 0 1.4rem;
+            padding: 0 1.8rem;
             border-radius: 5rem;
             background-color: var(--white);
             border: 1px solid var(--black);

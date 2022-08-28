@@ -1,16 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
 
-function SearchNotFound() {
+function ContentNotFound() {
    return (
       <Container>
-         <h1>Opps! No results to show</h1>
-         <p>Please make sure your words are spelled correctly</p>
+         <h1>Opps!</h1>
+         <p>No results to show, please try again.</p>
       </Container>
    );
 }
 
-export default SearchNotFound;
+export default ContentNotFound;
 
 const Container = styled.section`
    height: calc(100vh - 88px);

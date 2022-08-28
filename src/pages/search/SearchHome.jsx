@@ -27,7 +27,7 @@ function SearchHome() {
          const tags = document.querySelectorAll('.tag');
          let lastRandom;
          const timer = setInterval(() => {
-            const random = Math.floor(Math.random() * 30);
+            const random = Math.floor(Math.random() * 25);
             tags[random].classList.add('active');
             tags[lastRandom]?.classList.remove('active');
             lastRandom = random;

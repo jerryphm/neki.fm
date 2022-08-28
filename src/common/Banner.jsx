@@ -21,23 +21,30 @@ function Banner({ info }) {
    };
    return (
       <Container className='banner' color={getColor()}>
-         <h1>{info.name}</h1>
+         {info.artist ? <h3>{info.artist}</h3> : ''}
+         <h1>{info.name && 'Album: ' + info.name}</h1>
          <div>
             <button onClick={handlePlaying} className='ellipsis'>
                <BsPlayFill />
-               PLAY ARTIST
+               PLAY {info.artist ? 'ALBUM' : 'ARTIST'}
             </button>
             <div className='banner-listeners'>
                <p>Listeners</p>
-               <p className='ellipsis'>{correct(info.stats.listeners)}</p>
+               <p className='ellipsis'>
+                  {correct(info.stats?.listeners || info.listeners)}
+               </p>
             </div>
             <div className='banner-playcount'>
                <p>Playcount</p>
-               <p className='ellipsis'>{correct(info.stats.playcount)}</p>
+               <p className='ellipsis'>
+                  {correct(info.stats?.playcount || info.playcount)}
+               </p>
             </div>
             <div className='banner-published'>
                <p>Published</p>
-               <p className='ellipsis'>{info.bio.published}</p>
+               <p className='ellipsis'>
+                  {info.bio?.published || info.wiki?.published}
+               </p>
             </div>
          </div>
          <div className='banner-tags'>

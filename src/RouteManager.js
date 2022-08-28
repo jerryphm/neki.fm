@@ -11,7 +11,8 @@ import {
    Album,
    AlbumHome,
 } from './pages';
-import { SearchHome, Result, SearchNotFound, Tag } from './pages/search';
+import { SearchHome, Result, Tag } from './pages/search';
+import {ContentNotFound} from './common'
 
 function RouteManager() {
    return (
@@ -27,7 +28,7 @@ function RouteManager() {
                      <Route path=':tagKeyWord' element={<Tag />} />
                   </Route>
                   <Route path=':resultKeyWord' element={<Result />} />
-                  <Route path='notfound' element={<SearchNotFound />} />
+                  <Route path='notfound' element={<ContentNotFound />} />
                </Route>
                {/* Trend */}
                <Route path='trend' element={<Trend />}></Route>
@@ -41,7 +42,8 @@ function RouteManager() {
                {/* Albums */}
                <Route path='albums' element={<Outlet />}>
                   <Route index element={<AlbumHome />} />
-                  <Route path=':albumName' element={<Album />} />
+                  <Route path=':albumInfo' element={<Album />} />
+                  <Route path='notfound' element={<ContentNotFound />} />
                </Route>
                {/* Not found */}
                <Route path='*' element={<NotFound />}></Route>

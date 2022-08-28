@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import fallbackImage from '../../assets/images/fallback.jpg';
 
 function ArtistCard({ artist }) {
-   const correct = (listeners) => {
+   const correctWithDash = (listeners) => {
       return listeners.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
    };
    const getCorrectImg = (artist) => {
@@ -17,7 +17,7 @@ function ArtistCard({ artist }) {
          <div className='artist-card__overlay'></div>
          <div className='artist-card__info'>
             <Link to={`/artists/${artist.name}`} className='ellipsis'>{artist.name}</Link>
-            <p>{correct(artist.listeners)} listeners</p>
+            <p>{correctWithDash(artist.listeners)} listeners</p>
          </div>
       </Container>
    );

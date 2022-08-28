@@ -10,7 +10,6 @@ import { useRef } from 'react';
 
 function Artist() {
    const { artistName } = useParams();
-   console.log(artistName);
    const [artistInfo, setArtistInfo] = useState(null);
    const [tracks, setTracks] = useState(null);
    const [albums, setAlbums] = useState(null);

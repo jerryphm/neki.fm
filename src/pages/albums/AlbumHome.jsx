@@ -21,7 +21,6 @@ function AlbumHome() {
                const topArtistRes = await client({
                   url: `/?method=geo.gettopartists&country=Viet Nam&limit=20`,
                });
-               console.log(topArtistRes);
                topArtists = topArtistRes.data.topartists.artist;
             }
             const getTopAlbum = (artistName) =>
@@ -36,7 +35,6 @@ function AlbumHome() {
                const albums = results.map(
                   (result) => result.data.topalbums.album[1]
                );
-               console.log('albumHome com', albums);
                dispatch(setAlbums(albums));
             });
          };
@@ -47,10 +45,10 @@ function AlbumHome() {
       albums && (
          <Container>
             <h2>
-               Most Loved Albums <br/>
+               Most Loved Albums <br />
                by Vietnames Listeners
             </h2>
-            <Albums albums={albums}/>
+            <Albums albums={albums} />
          </Container>
       )
    );

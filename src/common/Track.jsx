@@ -4,7 +4,7 @@ import { setIsPlaying, setTrackPosition } from '../store/playerSlice';
 import client from '../client';
 import { IoVolumeMediumOutline } from 'react-icons/io5';
 import styled from 'styled-components';
-function Track({ trackName, artistName, id }) {
+function Track({ trackName, artistName, id, listeners }) {
    //get info track
    const [infoTrack, setInfoTrack] = useState(null);
    useEffect(() => {
@@ -35,6 +35,7 @@ function Track({ trackName, artistName, id }) {
       dispatch(setIsPlaying(true));
       dispatch(setTrackPosition(id));
    };
+
    return (
       infoTrack && (
          <Container onClick={() => setPlayState(id)}>
@@ -42,12 +43,16 @@ function Track({ trackName, artistName, id }) {
                <span> {correctPosition(id + 1)}</span>
                <IoVolumeMediumOutline />
             </div>
-            <div className='track__name'>{infoTrack.name}</div>
-            <div className='track__artist-name'>{infoTrack.artist.name}</div>
+            <div className='track__name ellipsis'>{infoTrack.name}</div>
+            <div className='track__artist-name ellipsis'>
+               {infoTrack.artist.name}
+            </div>
             <div className='track__duration'>
                {convertDuration(infoTrack.duration)}
             </div>
-            <div className='track__album'>{infoTrack.album?.title || 'unknown album'}</div>
+            <div className='track__album ellipsis'>
+               {infoTrack.album?.title || 'unknown album'}
+            </div>
          </Container>
       )
    );
@@ -84,7 +89,7 @@ const Container = styled.section`
       position: relative;
       width: 3rem;
       padding-right: 1.5rem;
-      margin-right: 2rem;
+      margin-right: 1rem;
       text-align: center;
       svg {
          position: absolute;
@@ -112,11 +117,6 @@ const Container = styled.section`
       width: 20%;
    }
 
-   .track__name,
-   .track__artist-name,
-   .track__album {
-      white-space: nowrap;
-      text-overflow: ellipsis;
-      overflow: hidden;
+   .track__listeners ellipsis {
    }
 `;
