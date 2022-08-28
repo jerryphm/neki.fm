@@ -63,7 +63,7 @@ const Container = styled.section`
       }
       button {
          font-size: 13px;
-         color: var(--gray-text);
+         color: var(--light-gray-text);
       }
    }
    .home-playlist-tracks {

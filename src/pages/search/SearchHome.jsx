@@ -80,14 +80,6 @@ export const Container = styled.section`
       cursor: pointer;
       overflow: hidden;
       background-color: #fff;
-      span {
-         position: absolute;
-         background-color: var(--pink);
-         transform: translate(-50%, -50%);
-         pointer-events: none;
-         border-radius: 50%;
-         animation: ripples 0.5s ease-out;
-      }
       p {
          user-select: none;
       }

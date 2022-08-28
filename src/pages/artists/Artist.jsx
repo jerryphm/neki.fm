@@ -47,6 +47,7 @@ function Artist() {
             <Banner info={artistInfo} />
             <h2>Top Tracks</h2>
             <Tracks tracks={tracks} />
+            <h2>Most Loved Albums</h2>
             <Albums albums={albums} />
             <h2>Similars to {artistName}</h2>
             <SimilarsArtists similars={artistInfo.similar.artist} />

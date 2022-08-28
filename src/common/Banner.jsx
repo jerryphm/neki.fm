@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import { setIsPlaying, setTrackPosition } from '../store/playerSlice';
 import { useDispatch } from 'react-redux';
 
-function Banner({ info }) {
+function Banner({ info, isPassAlbum }) {
    const getColor = () => {
       const random = Math.floor(Math.random() * colors.length);
       return colors[random].color;
@@ -22,7 +22,7 @@ function Banner({ info }) {
    return (
       <Container className='banner' color={getColor()}>
          {info.artist ? <h3>{info.artist}</h3> : ''}
-         <h1>{info.name && 'Album: ' + info.name}</h1>
+         <h1>{isPassAlbum ? 'Album: ' + info.name : 'Artist: ' + info.name}</h1>
          <div>
             <button onClick={handlePlaying} className='ellipsis'>
                <BsPlayFill />
@@ -43,18 +43,20 @@ function Banner({ info }) {
             <div className='banner-published'>
                <p>Published</p>
                <p className='ellipsis'>
-                  {info.bio?.published || info.wiki?.published}
+                  {info.bio?.published || info.wiki?.published || '...'}
                </p>
             </div>
          </div>
-         <div className='banner-tags'>
-            Genres:
-            {info.tags.tag.map((t, i) => (
-               <Link to={`/search/tag/${t.name}`} className='ellipsis'>
-                  {t.name}
-               </Link>
-            ))}
-         </div>
+         {info.tags.tag && (
+            <div className='banner-tags'>
+               Genres:
+               {info.tags.tag.map((t, i) => (
+                  <Link to={`/search/tag/${t.name}`} className='ellipsis'>
+                     {t.name}
+                  </Link>
+               ))}
+            </div>
+         )}
       </Container>
    );
 }

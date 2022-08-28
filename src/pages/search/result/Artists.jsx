@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import client from '../../../client';
 import styled from 'styled-components';
 import fallbackImage from '../../../assets/images/fallback.jpg'
+import {Link} from 'react-router-dom'
 
 
 function Artists({ artists }) {
@@ -40,8 +41,8 @@ function Artists({ artists }) {
             <h2>Top Artists</h2>
             <div>
                {renderedContent.map((r, i) => (
-                  <a
-                     href='#'
+                  <Link
+                     to={`/artists/${r.name}`}
                      style={{ backgroundImage: `url(${getImage(r.img)})` }}
                      key={i}
                   >
@@ -50,7 +51,7 @@ function Artists({ artists }) {
                         <br />
                         Listeners: {r.listeners}
                      </span>
-                  </a>
+                  </Link>
                ))}
             </div>
          </Container>

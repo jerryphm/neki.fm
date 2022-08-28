@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import fallbackImage from '../../../assets/images/fallback.jpg'
+import {Link} from 'react-router-dom'
 
 function Albums({ albums }) {
    const getImage = (album) => album.image[3]['#text'] || fallbackImage
@@ -10,8 +11,8 @@ function Albums({ albums }) {
             <h2>Top Albums</h2>
             <div>
                {albums.map((album, i) => (
-                  <a
-                     href='#'
+                  <Link
+                     to={`/albums/${album.name}`}
                      style={{
                         backgroundImage: `url(${getImage(album)})`,
                      }}
@@ -22,7 +23,7 @@ function Albums({ albums }) {
                         <br />
                         Artist: {album.artist}
                      </span>
-                  </a>
+                  </Link>
                ))}
             </div>
          </Container>

@@ -22,14 +22,15 @@ export default ArtistCard;
 const Container = styled.section`
    display: flex;
    height: 4rem;
-   gap: 1rem;
+   gap: 1.5rem;
    margin-bottom: 2rem;
    div:first-child {
       flex-shrink: 0;
       flex-grow: 0;
-      height: 4rem;
-      width: 4rem;
+      height: 3.7rem;
+      width: 3.7rem;
       border-radius: 5rem;
+      border: 3px solid var(--gray-text);
       background-position: center;
       background-size: 120%;
       background-repeat: no-repeat;
@@ -50,7 +51,6 @@ const Container = styled.section`
       h4 {
          font-size: var(--fontbase);
          font-weight: normal;
-         
       }
       p {
          font-size: 14px;

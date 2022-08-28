@@ -11,7 +11,6 @@ import { BiChart, BiAlbum } from 'react-icons/bi';
 import { FiSearch } from 'react-icons/fi';
 import { TbLayoutSidebarRightExpand } from 'react-icons/tb';
 import { GiSeaStar } from 'react-icons/gi';
-import { MdOutlineLibraryMusic } from 'react-icons/md';
 import styled from 'styled-components';
 
 function Sidebar() {
@@ -34,8 +33,7 @@ function Sidebar() {
       { to: '/search', icon: <FiSearch />, display: 'Search' },
       { to: '/trend', icon: <BiChart />, display: 'Trend' },
       { to: '/artists', icon: <GiSeaStar />, display: 'Artists' },
-      { to: '/albums', icon: <MdOutlineLibraryMusic />, display: 'Albums' },
-      { to: '/songs', icon: <BiAlbum />, display: 'Songs' },
+      { to: '/albums', icon: <BiAlbum />, display: 'Albums' },
    ];
    const toggleSideBarWidth = () => {
       const rawContainer = document.getElementsByTagName('aside');

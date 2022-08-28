@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 function Artists({ artists }) {
@@ -7,9 +8,9 @@ function Artists({ artists }) {
          <h2>Top Artists</h2>
          <div className='artist__marquee'>
             {artists.map((artist, i) => (
-               <a href='#' key={i}>
+               <Link to={`/artists/${artist.name}`} key={i}>
                   <span>{artist.name}</span>
-               </a>
+               </Link>
             ))}
          </div>
       </Container>
@@ -55,5 +56,4 @@ const Container = styled.section`
          transform: translate(var(--move-final));
       }
    }
-   
 `;

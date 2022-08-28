@@ -4,7 +4,6 @@ import {
    Home,
    Search,
    Trend,
-   Songs,
    NotFound,
    ArtistHome,
    Artist,
@@ -32,8 +31,6 @@ function RouteManager() {
                </Route>
                {/* Trend */}
                <Route path='trend' element={<Trend />}></Route>
-               {/* Songs */}
-               <Route path='songs' element={<Songs />}></Route>
                {/* Aritsts */}
                <Route path='artists' element={<Outlet />}>
                   <Route index element={<ArtistHome />} />

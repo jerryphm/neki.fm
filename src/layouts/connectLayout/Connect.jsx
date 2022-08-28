@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import client from '../../client';
 import MD5 from 'crypto-js/md5';
@@ -24,8 +24,7 @@ function Connect() {
    //get token, session key and hide connect page, after redirecting
    const dispatch = useDispatch();
    const url = window.location.href;
-   useMemo(() => {
-      //using useMemo hook instead of useLayoutEffect to prevent dom mutation *
+   useEffect(() => {
       if (url.includes('?token=') || url.includes('&token=')) {
          setAuthorizedState(true); // *
          const token = url.split('token=')[1];
@@ -48,11 +47,12 @@ function Connect() {
       }
    }, []);
 
-   //example account
-   console.group('example account:');
+   //demo account
+   console.group('demo account:');
    console.log('username: mr-john-doe');
    console.log('pass: mr-john-doe-1');
    console.groupEnd();
+   useEffect(() => console.clear);
 
    return (
       !isAuthorizedState && (
@@ -79,11 +79,7 @@ function Connect() {
                      <p>LastFM</p>
                   </Logo>
                </Logos>
-               <Button
-                  onClick={handleConnect}
-               >
-                  Connect
-               </Button>
+               <Button onClick={handleConnect}>Connect</Button>
             </Container>
          </Wrapper>
       )

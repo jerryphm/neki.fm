@@ -8,6 +8,7 @@ function Home() {
          <Col>
          	<TrendingSong />
 	         <UserPlaylist />
+				<span className='more-space'></span>
          </Col>
          <Col>
          	<TopTags />
@@ -35,6 +36,10 @@ const Container = styled.section`
 		width: 29%;
 		flex-shrink: 0;
 		flex-grow: 0;
+	}
+	.more-space {
+		display: inline-block;
+		height: 3rem;
 	}
 `;
 

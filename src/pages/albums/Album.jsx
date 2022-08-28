@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
 import { useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import client from '../../client';
 import styled from 'styled-components';
 import { Banner, Tracks, Albums } from '../../common';
 
-
 function Album() {
    const { albumInfo } = useParams();
-   const navigate = useNavigate();
    const [albums, setAlbums] = useState(null);
+   const [isOk, setOk] = useState(true);
    useEffect(() => {
       const getAlbumData = async () => {
          const albumName = albumInfo.slice(0, albumInfo.indexOf('-'));
@@ -21,18 +20,27 @@ function Album() {
             const albums = albumInfoRes.data.album;
             setAlbums(albums);
          } catch {
-            navigate('/albums/notfound');
+            setOk(false);
          }
       };
       getAlbumData();
    }, []);
-   return (
-      albums && (
-         <Container>
-            <Banner info={albums} />
-            <h2>Track List</h2>
-            <Tracks tracks={albums.tracks.track}/>
-         </Container>
+   return albums ? (
+      <Container>
+         <Banner info={albums} isPassAlbum />
+         <h2>Track List</h2>
+         {albums.tracks ? (
+            <Tracks tracks={albums.tracks.track} />
+         ) : (
+            <p>Sorry! Track list not found ☹️</p>
+         )}
+      </Container>
+   ) : (
+      isOk || (
+         <div className='album-not-found'>
+            <h3>Opps!</h3>
+            <p>Album not found, please try again.</p>
+         </div>
       )
    );
 }

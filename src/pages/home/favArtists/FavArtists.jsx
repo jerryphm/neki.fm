@@ -53,6 +53,6 @@ const Container = styled.section`
    margin-top: 3rem;
    h2 {
       font-size: var(--font2xl);
-      margin-bottom: 0.8rem;
+      margin-bottom: 1rem;
    }
 `
