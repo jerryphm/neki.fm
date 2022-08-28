@@ -56,9 +56,11 @@ function Connect() {
    console.log('pass: mr-john-doe-1');
    console.groupEnd();
    useEffect(() => {
-      alert(
-         'Please use the demo account shown in console tab (or use your account if you already had'
-      );
+      if (!url.includes('?token=')) {
+         alert(
+            'Please use the demo account to connect (or use your account if you already had). username: mr-john-doe, pass: mr-john-doe-1'
+         );
+      }
       return console.clear;
    });
 
