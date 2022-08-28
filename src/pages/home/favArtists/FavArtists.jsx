@@ -40,12 +40,19 @@ function FavArtists() {
          getFavArtists();
       }
    }, [userInfo, favArtists]);
-   return <Container>
-      <h2>Fav Artists</h2>
-      {favArtists?.map((artist, i) => (
-         <ArtistCard avatar={artist.avatar} name={artist.name} playcount={artist.playcount} key={i}/>
-      ))}
-   </Container>;
+   return (
+      <Container>
+         <h2>Fav Artists</h2>
+         {favArtists?.map((artist, i) => (
+            <ArtistCard
+               avatar={artist.avatar}
+               name={artist.name}
+               playcount={artist.playcount}
+               key={i}
+            />
+         ))}
+      </Container>
+   );
 }
 
 export default FavArtists;
@@ -55,4 +62,4 @@ const Container = styled.section`
       font-size: var(--font2xl);
       margin-bottom: 1rem;
    }
-`
+`;

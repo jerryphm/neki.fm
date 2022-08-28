@@ -18,7 +18,7 @@ export default Header;
 
 const Container = styled.header`
    position: relative;
-   height: var(--header-height);
+   height: 8rem;
    display: flex;
    align-items: center;
    section {

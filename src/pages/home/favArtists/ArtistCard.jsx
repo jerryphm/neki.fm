@@ -6,7 +6,7 @@ import styled from 'styled-components';
 function ArtistCard({ avatar, name, playcount }) {
    return (
       <Container>
-         <div style={{ backgroundImage: `url(${avatar})` }} />
+         <img src={avatar} loading='lazy' decoding='async'/>
          <div>
             <h4>{name}</h4>
             <p>Playcount: {playcount}</p>
@@ -21,29 +21,31 @@ function ArtistCard({ avatar, name, playcount }) {
 export default ArtistCard;
 const Container = styled.section`
    display: flex;
+   align-items: center;
    height: 4rem;
    gap: 1.5rem;
    margin-bottom: 2rem;
-   div:first-child {
+   img:first-child {
+      display: inline-block;
+      box-sizing: border-box;
       flex-shrink: 0;
       flex-grow: 0;
       height: 3.7rem;
       width: 3.7rem;
       border-radius: 5rem;
-      border: 3px solid var(--gray-text);
-      background-position: center;
-      background-size: 120%;
-      background-repeat: no-repeat;
+      outline: 3px solid var(--gray-text);
+      object-fit: cover;
    }
    div:nth-child(2) {
       display: flex;
       flex-direction: column;
+      gap: 2px;
       justify-content: space-between;
       padding: 2px 0;
       overflow: hidden;
       h4,
       p {
-         line-height: 1;
+         line-height: 1.2;
          overflow: hidden;
          text-overflow: ellipsis;
          white-space: nowrap;

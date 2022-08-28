@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { authSelector, setUserInfo } from '../../../store/authSlice';
 import { NavLink } from 'react-router-dom';
@@ -47,10 +47,10 @@ function Sidebar() {
             onClick={toggleSideBarWidth}
          />
          <div className='sidebar__logo'>
-            <img src={logo} />
-            <span>
+            <img src={logo} loading='lazy' decoding='async' />
+            <p>
                <span>Neki</span>FM
-            </span>
+            </p>
          </div>
          <nav>
             {navLinkArr.map((navLink, i) => (
@@ -65,7 +65,7 @@ function Sidebar() {
             ))}
          </nav>
          <div className='sidebar__user'>
-            <img src={userInfo?.avatar} />
+            <img src={userInfo?.avatar} loading='lazy' decoding='async' />
             <span>{userInfo?.name}</span>
          </div>
       </Container>
@@ -100,7 +100,7 @@ const Container = styled.aside`
       img {
          width: 35px;
       }
-      span {
+      p {
          font-size: var(--fontlg);
          span {
             color: var(--red);
@@ -175,6 +175,7 @@ const Container = styled.aside`
    }
    &.collapse {
       width: 86px;
+      p,
       span {
          opacity: 0;
          font-size: 0px;

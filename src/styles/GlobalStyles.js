@@ -41,6 +41,7 @@ export const GlobalStyles = createGlobalStyle`
    html {
       font-size: 62.5%;
       height: 100vh;
+      background-color: var(--black);
    }
    body {
       font-size: 16px;

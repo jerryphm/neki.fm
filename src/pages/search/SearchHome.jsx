@@ -48,7 +48,7 @@ function SearchHome() {
          <h2>Most popular tags for you</h2>
          {tags?.map((tag, i) => (
             <Link to={`tag/${correct(tag.name)}`} className='tag' key={i}>
-               <p>{tag.name}</p>
+               <p className='ellipsis'>{tag.name}</p>
                <BsMusicNote />
             </Link>
          ))}
@@ -82,6 +82,7 @@ export const Container = styled.section`
       background-color: #fff;
       p {
          user-select: none;
+         text-transform: capitalize;
       }
       svg {
          display: none;

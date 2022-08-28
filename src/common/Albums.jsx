@@ -11,13 +11,13 @@ function Albums({ albums }) {
                <Link
                   to={`/albums/${album.name + '-' + album.artist.name}`}
                   style={{ backgroundImage: `url(${album.image[3]['#text']})` }}
+                  className='lazy'
                   key={i}
                >
-                  <span>
-                     <span> {album.name}</span>
-                     <br />
-                     {album.artist.name}
-                  </span>
+                  <p>
+                     <span className='ellipsis'> {album.name}</span>
+                     <span className='ellipsis'>{album.artist.name}</span>
+                  </p>
                   <button>
                      Discover <TbSend />
                   </button>
@@ -50,7 +50,7 @@ const Container = styled.section`
          @media only screen and (max-width: 850px) {
             width: calc(33% - 1.27%);
          }
-         & > span {
+         & > p {
             position: absolute;
             left: 0;
             right: 0;
@@ -64,13 +64,11 @@ const Container = styled.section`
             border-bottom-left-radius: 1rem;
             border-bottom-right-radius: 1rem;
             font-size: 14px;
-            color: var(--gray-text);
-
-            white-space: nowrap;
-            text-overflow: ellipsis;
-            overflow: hidden;
             span {
                color: var(--black);
+            }
+            span:last-child {
+               color: var(--gray-text);
             }
          }
          button {

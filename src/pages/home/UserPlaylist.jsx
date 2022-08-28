@@ -76,9 +76,7 @@ const Container = styled.section`
          padding: 0 1.5rem;
          border-radius: 1rem;
          background-color: var(--white);
-         font-size: var(--fontxs);
          color: var(--light-gray-text);
-         cursor: pointer;
          transition: 0.25s linear;
 
          span:first-child {

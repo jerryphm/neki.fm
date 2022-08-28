@@ -44,7 +44,7 @@ function TrendingSong() {
             </Link>
          </div>
          <div
-            className='home-trending-card'
+            className='home-trending-card lazy'
             style={{
                backgroundImage: `url(${top1Song?.image})`,
             }}
@@ -52,8 +52,8 @@ function TrendingSong() {
             <div className='home-trending-card__overlay'></div>
             <div>
                <div className='home-trending__info'>
-                  <h4>{top1Song ? top1Song.artist.name : 'artist'}</h4>
-                  <h1>{top1Song?.name}</h1>
+                  <h4 className='ellipsis'>{top1Song ? top1Song.artist.name : ''}</h4>
+                  <h1 className='ellipsis'>{top1Song?.name}</h1>
                </div>
                <div className='home-trending-btns'>
                   <button onClick={handlePlaying}>PLAY</button>
@@ -90,7 +90,7 @@ const Container = styled.section`
    }
    .home-trending-card {
       position: relative;
-      min-height: 20rem;
+      height: 20rem;
       border-radius: 1rem;
       background-size: cover;
       background-position: center; /// left ?

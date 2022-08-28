@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import artistBadge from '../../assets/images/ArtistBadge.png'
+import artistBadge from '../../assets/images/ArtistBadge.png';
 
 function ArtistTrend({ artists }) {
    return (
@@ -11,10 +11,14 @@ function ArtistTrend({ artists }) {
             style={{ backgroundImage: `url(${artists[0].image})` }}
          >
             <div>
-               <img className='badge'
-               src={artistBadge} />
+               <img
+                  className='badge'
+                  loading='lazy'
+                  decoding='async'
+                  src={artistBadge}
+               />
                <p className='trend-position'>1</p>
-               <img src={artists[0].image} />
+               <img src={artists[0].image} loading='lazy' decoding='async' />
                <Link to={`/artists/${artists[0].name}`}>{artists[0].name}</Link>
             </div>
          </div>
@@ -22,7 +26,7 @@ function ArtistTrend({ artists }) {
             {artists.map((artist, i) => (
                <div>
                   <p className='trend-position'>{i + 1}</p>
-                  <img src={artist.image} />
+                  <img src={artist.image} loading='lazy' decoding='async' />
                   <Link to={`/artists/${artist.name}`}>{artist.name}</Link>
                </div>
             ))}

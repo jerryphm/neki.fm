@@ -4,8 +4,6 @@ import styled from 'styled-components';
 
 function TagTrend({ tags }) {
    const correct = (taggings) => (Number(taggings) / 100000).toFixed(1);
-   const getColor = () => Math.random() * 2
-   
    return (
       <Container>
          <h2>Top Tags</h2>
@@ -13,7 +11,7 @@ function TagTrend({ tags }) {
             <Link to={`/search/tag/${tag.name}`} className='tag' key={i}>
                <p>{i + 1}</p>
                <p className='ellipsis'>{tag.name}</p>
-               <p className='ellipsis' color={getColor() ? 'green' : 'red'}>{correct(tag.taggings)}M</p>
+               <p className='ellipsis'>{correct(tag.taggings)}M</p>
             </Link>
          ))}
       </Container>
@@ -43,14 +41,13 @@ const Container = styled.section`
          user-select: none;
       }
       p:first-child {
-        min-width: 1.4rem;
+         min-width: 1.4rem;
       }
       p:nth-child(2) {
-        text-transform: capitalize;
+         text-transform: capitalize;
       }
       p:last-child {
          margin-left: auto;
-         color: ${props => props.color};
       }
    }
-`;
+   `;
