@@ -1,11 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import { AiFillPlayCircle } from 'react-icons/ai';
+import { TbSend } from 'react-icons/tb';
 
 function Albums({ albums }) {
    return (
       <Container>
-         <h2>Top Albums</h2>
          <div>
             {albums.map((album, i) => (
                <a
@@ -19,7 +18,7 @@ function Albums({ albums }) {
                      {album.artist.name}
                   </span>
                   <button>
-                     Listen now <AiFillPlayCircle />
+                     Discover <TbSend />
                   </button>
                </a>
             ))}
@@ -32,10 +31,6 @@ export default Albums;
 
 const Container = styled.section`
    margin-top: 3rem;
-   h2 {
-      font-size: var(--fontxl);
-      margin-bottom: 1rem;
-   }
    div {
       display: flex;
       flex-wrap: wrap;

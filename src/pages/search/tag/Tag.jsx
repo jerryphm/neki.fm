@@ -34,6 +34,7 @@ function Tag() {
          <Container>
             <Heading intro={intro} />
             <Artists artists={artists} />
+            <h2>Top Albums</h2>
             <Albums albums={albums} />
          </Container>
       )
@@ -42,8 +43,12 @@ function Tag() {
 
 export default Tag;
 const Container = styled.section`
-   height: calc(100vh - var(--header-height));
+   height: calc(100vh - 18rem);
    overflow: scroll;
+   h2 {
+      font-size: var(--fontxl);
+      margin-bottom: 1rem;
+   }
    /* Hide scrollbar for Chrome, Saf   ari and Opera */
    &::-webkit-scrollbar {
       display: none;
