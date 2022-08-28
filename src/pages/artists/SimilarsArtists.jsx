@@ -51,5 +51,6 @@ function SimilarsArtists({ similars }) {
 export default SimilarsArtists;
 const Container = styled.section`
    display: flex;
+   flex-wrap: wrap;
    gap: 4%;
 `;

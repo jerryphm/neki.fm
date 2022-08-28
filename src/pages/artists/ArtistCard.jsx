@@ -16,7 +16,7 @@ function ArtistCard({ artist }) {
       >
          <div className='artist-card__overlay'></div>
          <div className='artist-card__info'>
-            <Link to={artist.name}>{artist.name}</Link>
+            <Link to={`/artists/${artist.name}`} className='ellipsis'>{artist.name}</Link>
             <p>{correct(artist.listeners)} listeners</p>
          </div>
       </Container>
@@ -29,7 +29,7 @@ const Container = styled.section`
    min-height: 15rem;
    width: 22%;
    border-radius: 1rem;
-   margin-bottom: 3rem;
+   margin-bottom: 3rem; 
    background-size: cover;
    background-position: center;
    background-repeat: no-repeat;

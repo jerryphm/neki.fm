@@ -6,9 +6,11 @@ import styled from 'styled-components';
 import { Banner, Tracks } from '../../common';
 import { Albums } from '../search/tag';
 import SimilarsArtists from './SimilarsArtists';
+import { useRef } from 'react';
 
 function Artist() {
    const { artistName } = useParams();
+   console.log(artistName);
    const [artistInfo, setArtistInfo] = useState(null);
    const [tracks, setTracks] = useState(null);
    const [albums, setAlbums] = useState(null);
@@ -30,11 +32,19 @@ function Artist() {
          setTracks(topTracks);
          setAlbums(topAlbum);
       });
-   }, []);
+   }, [artistName]);
 
+   const containerRef = useRef(null);
+   if (containerRef.current) {
+      containerRef.current.scrollTo({
+         top: '100%',
+         left: 0,
+         behavior: 'smooth',
+      });
+   }
    return (
       artistInfo && (
-         <Container>
+         <Container ref={containerRef}>
             <Banner info={artistInfo} />
             <h2>Top Tracks</h2>
             <Tracks tracks={tracks} />

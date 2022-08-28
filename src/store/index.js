@@ -1,4 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
+import { albumReducer } from './albumSlice';
 import { artistReducer } from './artistSlice';
 import { authReducer } from './authSlice';
 import { lovedSongReducer } from './lovedSongSlice';
@@ -16,6 +17,7 @@ const store = configureStore({
       trending: trendingReducer,
       lovedSongs: lovedSongReducer,
       artist: artistReducer,
+      album: albumReducer,
    },
 });
 export default store;

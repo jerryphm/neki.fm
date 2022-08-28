@@ -8,6 +8,8 @@ import {
    NotFound,
    ArtistHome,
    Artist,
+   Album,
+   AlbumHome,
 } from './pages';
 import { SearchHome, Result, SearchNotFound, Tag } from './pages/search';
 
@@ -35,6 +37,11 @@ function RouteManager() {
                <Route path='artists' element={<Outlet />}>
                   <Route index element={<ArtistHome />} />
                   <Route path=':artistName' element={<Artist />} />
+               </Route>
+               {/* Albums */}
+               <Route path='albums' element={<Outlet />}>
+                  <Route index element={<AlbumHome />} />
+                  <Route path=':albumName' element={<Album />} />
                </Route>
                {/* Not found */}
                <Route path='*' element={<NotFound />}></Route>
