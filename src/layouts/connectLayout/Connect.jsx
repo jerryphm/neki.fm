@@ -25,11 +25,12 @@ function Connect() {
    const dispatch = useDispatch();
    const url = window.location.href;
    useLayoutEffect(() => {
-      if (url.includes('?token=')) { //server redirects to the homepage with only 'token' param
+      if (url.includes('?token=')) {
+         //server redirects to the homepage with only 'token' param
          setAuthorizedState(true);
-         const arr = url.split('?token=')
-         const token = arr[1]
-         const homepage = arr[0]
+         const arr = url.split('?token=');
+         const token = arr[1];
+         const homepage = arr[0];
          const getSk = async () => {
             try {
                const api_sig = MD5(
@@ -42,7 +43,7 @@ function Connect() {
                dispatch(setAuthorized(true));
                dispatch(setToken(token));
             } catch {
-               window.location.href = homepage
+               window.location.href = homepage;
             }
          };
          getSk();
@@ -54,7 +55,12 @@ function Connect() {
    console.log('username: mr-john-doe');
    console.log('pass: mr-john-doe-1');
    console.groupEnd();
-   useEffect(() => console.clear);
+   useEffect(() => {
+      alert(
+         'Please use the demo account shown in console tab (or use your account if you already had'
+      );
+      return console.clear;
+   });
 
    return (
       !isAuthorizedState && (
