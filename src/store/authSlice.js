@@ -2,8 +2,8 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
    isAuthorized: false,
-   api_key: 'fad3f80f9f436c3798263b87553f645d',
-   secret: '57f55113dfa056a3e58b95abf0d62bbe',
+   api_key: 'e316df1ddbb64cad4e645286042b7d5d',
+   secret: 'c7524f3b10d0c25934b6af0cecbb5cea',
    token: '',
    api_sig: '',
    sk: '',
