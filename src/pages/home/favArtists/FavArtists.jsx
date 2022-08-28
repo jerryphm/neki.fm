@@ -50,7 +50,7 @@ function FavArtists() {
                playcount={artist.playcount}
                key={i}
             />
-         ))}
+         )) || <h4>You haven't Follow/Scrobbles any artist</h4>}
       </Container>
    );
 }

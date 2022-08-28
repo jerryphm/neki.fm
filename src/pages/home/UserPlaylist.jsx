@@ -45,7 +45,9 @@ function UserPlaylist() {
                </span>
                <span>ALBUM</span>
             </div>
-            {renderedLovedSongs && <Tracks tracks={renderedLovedSongs} />}
+            {(renderedLovedSongs && <Tracks tracks={renderedLovedSongs} />) || (
+               <h3>No loved Tracks to show</h3>
+            )}
          </div>
       </Container>
    );

@@ -8,15 +8,15 @@ function ArtistCard({ artist }) {
       return listeners.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
    };
    const getCorrectImg = (artist) => {
-      return artist.avatar || fallbackImage
-   }
+      return artist.avatar || fallbackImage;
+   };
    return (
-      <Container
-         style={{ backgroundImage: `url(${getCorrectImg(artist)})` }}
-      >
+      <Container style={{ backgroundImage: `url(${getCorrectImg(artist)})` }}>
          <div className='artist-card__overlay'></div>
          <div className='artist-card__info'>
-            <Link to={`/artists/${artist.name}`} className='ellipsis'>{artist.name}</Link>
+            <Link to={`/artists/${artist.name}`} className='ellipsis'>
+               {artist.name}
+            </Link>
             <p>{correctWithDash(artist.listeners)} listeners</p>
          </div>
       </Container>
@@ -29,7 +29,7 @@ const Container = styled.section`
    min-height: 15rem;
    width: 22%;
    border-radius: 1rem;
-   margin-bottom: 3rem; 
+   margin-bottom: 3rem;
    background-size: cover;
    background-position: center;
    background-repeat: no-repeat;
@@ -48,15 +48,6 @@ const Container = styled.section`
       left: 1rem;
       right: 1rem;
       color: var(--white);
-      cursor: pointer;
-
-      h4 {
-         white-space: nowrap;
-         text-overflow: ellipsis;
-         overflow: hidden;
-         max-width: 15ch;
-         font-size: var(--font-base);
-      }
       p {
          font-size: 13px;
          color: #e9e6e6;
