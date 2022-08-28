@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useLayoutEffect, useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import client from '../../client';
 import MD5 from 'crypto-js/md5';
@@ -13,6 +13,7 @@ import lastfm from '../../assets/images/lastfm.png';
 import styled from 'styled-components';
 
 function Connect() {
+   const homepage = window.location.href;
    const [isAuthorizedState, setAuthorizedState] = useState(false);
 
    //request authorization from the user
@@ -24,9 +25,9 @@ function Connect() {
    //get token, session key and hide connect page, after redirecting
    const dispatch = useDispatch();
    const url = window.location.href;
-   useEffect(() => {
+   useLayoutEffect(() => {
       if (url.includes('?token=') || url.includes('&token=')) {
-         setAuthorizedState(true); // *
+         setAuthorizedState(true);
          const token = url.split('token=')[1];
          const getSk = async () => {
             try {
@@ -40,7 +41,7 @@ function Connect() {
                dispatch(setAuthorized(true));
                dispatch(setToken(token));
             } catch {
-               window.location.href = 'http://localhost:3000/';
+               window.location.href = homepage;
             }
          };
          getSk();
@@ -99,10 +100,10 @@ const Container = styled.section`
    flex-direction: column;
    align-items: center;
    justify-content: space-around;
-   width: clamp(400px, 40vw, 700px);
-   height: 360px;
+   width: clamp(40rem, 40vw, 70rem);
+   height: 36rem;
    max-height: 70vh;
-   padding: 0 30px;
+   padding: 0 3rem;
    border-radius: 1.5rem;
    background-color: var(--white);
 `;
@@ -123,12 +124,12 @@ const Logo = styled.div`
    }
 `;
 const Line = styled.div`
-   transform: translateY(-1.5rem);
    flex-grow: 1;
    display: flex;
    justify-content: space-between;
    align-items: center;
    height: 3rem;
+   transform: translateY(-1.5rem);
    span {
       height: 100%;
       width: 5px;
@@ -175,9 +176,9 @@ const Line = styled.div`
 `;
 
 const Button = styled.button`
-   height: 55px;
+   height: 5.5rem;
    width: fit-content;
-   padding: 0 30px;
+   padding: 0 3rem;
    border-radius: 1rem;
    background-color: var(--red);
    color: var(--white);

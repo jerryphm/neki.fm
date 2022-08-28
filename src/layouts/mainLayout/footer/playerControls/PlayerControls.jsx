@@ -214,6 +214,9 @@ function PlayerControls() {
       dispatch(setVideoInfo(e.target.videoTitle));
    };
 
+   //clear warning by react-youtube
+   useEffect(() => console.clear);
+
    return (
       <Container>
          <YtFrame
