@@ -23,6 +23,3 @@
 -  ReactJs, Redux, Router V6, Styled Component
 -  Last.fm API, Iframe Youtube API
 
-## Contact me: phamthang11782@gmail.com
-
-#### It's my pleasure to work with you 😊
